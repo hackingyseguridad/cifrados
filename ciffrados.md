@@ -1,9 +1,9 @@
 Cifrados recomendados
  
-1.- INTRODUCCIÓN
+INTRODUCCIÓN
 Se analizan los protocolos y cifrados rotos/vulnerados y se elabora un documento que sirva de referencia con los ci-frados recomendados, nivel de seguridad media y nivel de seguridad alta.
 
-2.	SSL/TLS
+- SSL/TLS
 SSL/TLS; SSL (Secure Sockets Layer) Capa de Conexiones Seguras. Es un protocolo que hace uso de certificados digitales para establecer comunicaciones seguras a través de Internet y utiliza un paquete de cifrados “Cipher Suite”.
 
 PROTOCOLOS RECOMENDADOS:
@@ -16,15 +16,12 @@ TLS1.1 = no recomendados, decretado obsoleto el 13/01/2021. Deshabilitado de los
 TLS1.2 = si es recomendado, con cifrados: AES > 128 GCM y o CHACHA20+POLY1305 256
 TLS1.3 = si es recomendado, con la suite de cifrados que ofrece.
 
-
-
- 
-
 TABLAS DE CIFRADOS RECOMENDADOS EN TLS U OTROS PROTOCOLOS:
 
 Los cifrados y combinaciones recomendadas detallados a continuación para los protocolos SSLv2, SSv3, TLS 1.0, TLS 1.1, TLS 1.2 y TLS 1.3, serían los mismos a considerar/utilizar, recomendados en caso de implementar o configurar cifrado en otros protocolos como por ejemplo: 
 SNMPv3, Telnet, sFTP, NFS, smtp, pop3, IMAP4, HTTP WWW, ...
-2.2	SSLV2, SSLV3, TLS 1.0, TLS 1.1
+
+SSLV2, SSLV3, TLS 1.0, TLS 1.1
 Algoritmos cripto-gráficos	Hash; Longitudes de clave (bits)	Uso	Seguridad me-dia	Seguridad Alta
 				
 DES	40, 56	Cifrado	No utilizar	No utilizar
