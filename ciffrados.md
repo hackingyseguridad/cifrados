@@ -1,100 +1,10 @@
 Cifrados recomendados
  
-INDICE:
-1.1	OBJETO	4
-1.2	DOCUMENTACIÓN DE REFERENCIA	4
-1.3	UNIDADES AFECTADAS	4
-1.4	DEROGACIONES Y EFECTIVIDAD	4
-1.5	UNIDAD RESPONSABLE	4
-1.6	LISTA DE REVISIONES	4
-2.	SSL/TLS	6
-2.2	SSLV2, SSLV3, TLS 1.0, TLS 1.1	7
-2.3	TLS1.2	8
-2.4	TLS1.3	8
-2.5	CIFRADOS POST CUANTICOS	11
-2.6	CONJUNTO DE COMBINACIONES (CIPHER SUITE) RECOMENDADAS TLS	15
-2.7	CONJUNTO DE CIFRADOS (CIPHER SUITE) NO RECOMENDADOS TLS	18
-3.	IPSEC	28
-3.1	IKE V1	29
-3.2	IKE V2	29
-4.	SSH/ SCP	31
-4.1	SSH V1	31
-4.2	SSH V2	31
-5.	PROTOCOLOS DE TRANSFERENCIA DE ARCHIVOS	33
-6.	PGP  Y  S/MINE	34
-7.	CIFRADOS DE ALMACENAMIENTO DE DATOS	35
-8.	WIFI	36
-9.	RESUMEN DE RECOMENDACIONES	38
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-INTRODUCCIÓN
+1.- INTRODUCCIÓN
 Se analizan los protocolos y cifrados rotos/vulnerados y se elabora un documento que sirva de referencia con los ci-frados recomendados, nivel de seguridad media y nivel de seguridad alta.
-1.1	OBJETO
-El objetivo de este documento es servir de consulta y referencia a tener en cuenta para los requisitos de cifra-dos que, a tenor de las vulnerabilidades conocidas, consideramos seguros a fecha 18 de octubre de 2024.
-La distribución del documento es la siguiente:
-•	El capítulo 2 muestra la tabla de cifrados recomendados con seguridad media, alta para SSL y TLS.
-•	En los capítulos 3-6 se desglosan los cifrados recomendados para IPSec, SSH/SCP, FTP y PGP .
-•	En el Anexo I se incluyen los cipher suite completos de cada versión de cada protocolo.
-1.2	DOCUMENTACIÓN DE REFERENCIA
-1.3	UNIDADES AFECTADAS
-1.4	DEROGACIONES Y EFECTIVIDAD
-1.5	UNIDAD RESPONSABLE
-1.6	LISTA DE REVISIONES
-
-NÚMERO EDICIÓN	FECHA EDICIÓN	APARTADOS REVISA-DOS	CAMBIOS EFECTUADOS	OBSERVACIONES
-Borrador	22-05-2020			Edición inicial del do-cumento
-1ª Edición	22-06-2020	SSH, PGP,	Se añade detalle cifrados, no recomendados “no utilizar”	
-2º Edición	11-11-2020	IKEv2, Curva elíptica DH	Se cambia recomendación para DH Grupo Diffie-Hellman 24	
-3º Edición	24-11-2020	SSH	CHACHA20+POLY1305, se revisa y recomienda	
-4ª Edición	11-01-2021	TLS 1.1	Se cambia recomendación para protocolo TLS 1.1	
-5ª Edición	15-04-2021	RSA	Se modifica recomendación para cifrado RSA	
-6ª Edición	20-05-2021	Cifrados de almacenamiento	Se ha incluido los cifrados para almacenamiento de da-tos	
-7º Edición	17-11-2021	TLS 1.1 y TLS 1.2	Se añade cifrados GOST y AEAD	
-8ª Edición	21-02-2022	Certificado digital 	Se añade recomendaciones	
-9º Edición	22-03-2022	AES-CBC – No utilizar CBC!		
-10ª Edición	19-05-2022	AES 1024, almacenamiento	Se desaconseja AES 1024 CTR	
-11ª Edición	16-06-2022	Protocolos de transferencia archivos FTP, SFTP, FTPS, FTPES		
-12ª Edición	13-09-2022	S/MIME	Se añade S/MIME, 2ª capa de cifrado de archivos	
-13ª Edición	24-10-2022	Conjunto cifrados TLS (cip-her Suite) ARIA o CAMELIA  con CGM o POLY1305	Se añade puntos 2.5 y 2.6 con conjunto de cifrados Cipher Suite y recomendaciones	
-14ª Edición	09-01-2023	RSA	Se modifica por 2ª vez reco-mendación para cifrado RSA	
-15ª Edición	31-03-2023	Vulnerabilidades en SHA-3	Se modifica recomendación en SHA-3, SHAKE, EdDSA	
-16ª Edición	24-05-2023	Cifrados para redes WIFI	Se añade recomendaciones para cifrados WIFI 	
-17ª Edición	05-07-2023	IPSec	Recomendación cifrados en IPsec	
-18ª Edición	05-09-2023	TLS 1.1	Se cambia recomendación para el protocolo TLS 1.1	
-19ª Edición	18-11-2023	RSA en SSH e IP Sec	Deshabilitar RSA en SSH e IPSec y versiones OpenSSH	
-20ª Edición	21-03-2024	AES-256-CMAC	Se añade esta combinación 	
-21º Edición	12-08-2024	Vulnerabilidades DH Diffie Hellman	Se añade descripción de varias vulnerabilidades 	
-22º Edición	18-10-2024	Nuevos  estandares cifrados PQC post -cuánticos	Se añade nuevos estándares del NIST y sus usos	
 
 2.	SSL/TLS
 SSL/TLS; SSL (Secure Sockets Layer) Capa de Conexiones Seguras. Es un protocolo que hace uso de certificados digitales para establecer comunicaciones seguras a través de Internet y utiliza un paquete de cifrados “Cipher Suite”.
-
- 
-
--	Por y para simplificar, como elemento principal de criterio utilizaremos en este documento, fundamentalmente el cifrado de trasporte (Transport Cipher, o Bulk Encription) 
-
- 
-
--	Para ellos se caracterizará con colores, rojo recomendado, amarillo roto pero difícil de explotar y rojo no utili-zar:
-
-Cifrado seguro ó sin vulnerar todavía
-Cifrado roto, pero difícil de explotar
-No utilizar cifrado. Facil de descifrar 
 
 PROTOCOLOS RECOMENDADOS:
 
