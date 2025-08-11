@@ -1,80 +1,132 @@
 Cifrados recomendados
  
 INTRODUCCIÓN
+
 Se analizan los protocolos y cifrados rotos/vulnerados y se elabora un documento que sirva de referencia con los ci-frados recomendados, nivel de seguridad media y nivel de seguridad alta.
 
-- SSL/TLS
+SSL/TLS 
+
 SSL/TLS; SSL (Secure Sockets Layer) Capa de Conexiones Seguras. Es un protocolo que hace uso de certificados digitales para establecer comunicaciones seguras a través de Internet y utiliza un paquete de cifrados “Cipher Suite”.
 
 PROTOCOLOS RECOMENDADOS:
 
 SSLv1 = no recomendado, los cifrados están todos rotos/vulnerados. 
+
 SSLv2 = no recomendado, los cifrados están todos rotos/vulnerados.
+
 SSLv3 = no recomendado, los cifrados están todos rotos/vulnerados. ¡Vulnerable a POODLE!
+
 TLS1.0 = no recomendados, porque tienen vulnerabilidades propias el protocolo tls1.0 como BEAST (Browser Exploit Against SSL/TLS), aunque la suite tiene cifrados de trasporte como AES
+
 TLS1.1 = no recomendados, decretado obsoleto el 13/01/2021. Deshabilitado de los Windows en 2023
+
 TLS1.2 = si es recomendado, con cifrados: AES > 128 GCM y o CHACHA20+POLY1305 256
+
 TLS1.3 = si es recomendado, con la suite de cifrados que ofrece.
 
 TABLAS DE CIFRADOS RECOMENDADOS EN TLS U OTROS PROTOCOLOS:
 
-Los cifrados y combinaciones recomendadas detallados a continuación para los protocolos SSLv2, SSv3, TLS 1.0, TLS 1.1, TLS 1.2 y TLS 1.3, serían los mismos a considerar/utilizar, recomendados en caso de implementar o configurar cifrado en otros protocolos como por ejemplo: 
-SNMPv3, Telnet, sFTP, NFS, smtp, pop3, IMAP4, HTTP WWW, ...
+Los cifrados y combinaciones recomendadas detallados a continuación para los protocolos SSLv2, SSv3, TLS 1.0, TLS 1.1, TLS 1.2 y TLS 1.3, serían los mismos a considerar/utilizar, recomendados en caso de implementar o configurar cifrado en otros protocolos como por ejemplo:  SNMPv3, Telnet, sFTP, NFS, smtp, pop3, IMAP4, HTTP WWW, ...
 
 SSLV2, SSLV3, TLS 1.0, TLS 1.1
+
 Algoritmos cripto-gráficos	Hash; Longitudes de clave (bits)	Uso	Seguridad me-dia	Seguridad Alta
 				
 DES	40, 56	Cifrado	No utilizar	No utilizar
+
 CAMELLIA	128	Cifrado	No utilizar	No utilizar
+
 CAST	-	Cifrado	No utilizar	No utilizar
+
 EXPORT	40	Cifrado	No utilizar	No utilizar
+
 RC2	-	Cifrado	No utilizar	No utilizar
+
 RC5	-	Cifrado	No utilizar	No utilizar
+
 RC6	-	Cifrado	No utilizar	No utilizar
+
 IDEA	-	Cifrado	No utilizar	No utilizar
+
 SERPENT	-	Cifrado	No utilizar	No utilizar
+
 FORTEZZA	 	Cifrado	No utilizar	No utilizar
+
 TWIFISH	-	Cifrado	No utilizar	No utilizar
+
 GOST	256	Cifrado	No utilizar	No utilizar
+
 PSK		Cifrado	No utilizar	No utilizar
+
 NULL sin cifrado	-	Cifrado	No utilizar	No utilizar
+
 UNDEFINED	-	Cifrado	No utilizar	No utilizar
-2.3	TLS1.2
+
+TLS1.2
+
 Algoritmos cripto-gráficos	Hash; Longitudes de clave (bits)	Uso	Seguridad me-dia	Seguridad Alta
 				
 3DES 	128, 192	Cifrado	No utilizar	No utilizar
+
 ARIA	128, 256	Cifrado	No utilizar	No utilizar
+
 RC4 o ARC4 	 64-2048	Cifrado	No utilizar	No utilizar
+
 AES-ECB	128, 192, 256	Cifrado	No utilizar	No utilizar
+
 AES-CBC	128, 192, 256	Cifrado	No utilizar	≥ 256
+
 AES-CFB	128, 192, 256	Cifrado	≥ 128	≥ 256
+
 AES-CTR	128, 192, 256, 1024	Cifrado	1024, ≥ 128	≥ 256
+
 AES-GCM	128, 192, 256	Cifrado e Integridad	≥ 128	≥ 256
+
 AES-CCM	128, 192, 256	Cifrado e Integridad	≥ 128	≥ 256
+
 AES-CCM8	128, 192, 256	Cifrado e Integridad	≥ 128	≥ 256
+
 AEAD	128, 192, 256	Integridad	≥ 128	≥ 256
+
 CHA-CHA20+POLY1305	256	Cifrado e Integridad	256	256
+
 RSA	1024, 2048, 3072, 4096	Intercambio de clave o Firma 	No utilizar	≥ 3072
+
 DH	1024, 2048, 3072, 4096	Intercambio de clave		≥ 3072
+
 ECDH	256, 384, 512	Intercambio de clave	≥ 256	≥ 384
+
 ECDSA	256, 384, 512	Firma	≥ 256	≥ 384
+
 MD5	128	Hash	No utilizar	No utilizar
+
 SHA-1	160	Hash	No utilizar	No utilizar
+
 SHA-2 	256, 384, 512	Hash, Hmac	≥  256	≥  384
+
 SHA-3	224, 256, 384, 512	Hash, Hmac	≥  224	≥  384
-2.4	TLS1.3
+
+TLS1.3
+
 Algoritmos cripto-gráficos	Hash; Longitudes de clave (bits)	Uso	Seguridad me-dia	Seguridad Alta
 				
 AES-GCM	128, 192, 256	Cifrado e Integridad	≥ 128	≥ 256
+
 CHA-CHA20+POLY1305	256	Cifrado e Integridad	256	256
+
 RSA	2048, 3072, 4096	Firma 	≥ 2048	≥ 3072
+
 DH	2048, 3072, 4096	Intercambio de clave	≥ 2048	≥ 3072
+
 ECDH	256, 384, 512	Intercambio de clave	≥ 256	≥ 384
+
 ECDSA	256, 384, 512	Firma	≥ 256	≥ 384
+
 SHA-2 	256, 384, 512	Hash	≥  256	≥  384
+
 SHA-3	224, 256, 384, 512	Hash	≥  256	≥  384
 
-(ECH)  Encrypted ClientHello  https://blog.cloudflare.com/es-es/encrypted-client-hello-es-es/ nuevo es-tándar que completa a TLS 1.3, el sistema de cifrado que usan las webs HTTPS. Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el usuario. - el SNI muestra al inicio de la conxexión el fqdn sin cifrar; Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el  usua-rio. ECH que impide el funcionamiento de los filtros de bloqueo de webs piratas. 
+(ECH)  Encrypted ClientHello  https://blog.cloudflare.com/es-es/encrypted-client-hello-es-es/ nuevo es-tándar que completa a TLS 1.3, el sistema de cifrado que usan las webs HTTPS. Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el usuario. - el SNI muestra al inicio de la conxexión el fqdn sin cifrar; Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el  usua-rio. ECH que impide el funcionamiento de los filtros de bloqueo de webs piratas.  
 Por ejemplo haciendo interceptación de tráfico en un PC con tecnicas MiTM, con SNI: 
  
 - el navegado Google Chrome permite habilitar ECH, cifra el CLienthello extremo a extremo desde  el inicio  https://chromeenterprise.google/intl/en_ca/policies/#EncryptedClientHelloEnabled    
@@ -83,26 +135,21 @@ Web para auto-chequear los cifrados permitidos en la configuración actual por n
 https://clienttest.ssllabs.com:8443/ssltest/viewMyClient.html 
 
 AES en combinación de CBC (Cipher Block Chaining) no garantiza la integridad de los datos.
+
 CBC es un cifrado en bloque. Un cifrado de bloque es una función que tomará un bloque de texto sin forma-to (la entrada legible por humanos) de longitud n y una clave, y la usará para producir un bloque de texto cifrado de longitud N. 
+
 AES es el cifrado de bloques más popular en este momento, según lo recomiendan tanto NIST como NSA, opera en bloques de 128 bits con claves de 128, 192 o 256 bits.
+
 El problema aquí es que una función destinada a recibir entradas de 128 bits no cifrará una gran canti-dad de datos en una sola llamada. Cuando se enfrenta a ese problema, la solución intuitiva es simplemente dividir sus datos en múltiples bloques de 128 bits y simplemente llamar a AES con la misma clave en cada uno de ellos.
 No es seguro porque los patrones de datos pueden permanecer y servir como base para el análisis. CBC tiene como objetivo resolver esto agregando aleatoriedad a cada llamada al cifrado de bloque aplicando la operación exclusiva o (XOR) a cada bloque de texto sin formato con el bloque de texto cifrado generado previamente (o un vector de inicialización aleatorio, para el primer bloque). El descifrado funciona realizan-do el proceso a la inversa y aplicando XOR a cada texto sin formato generado con el texto cifrado anterior.
 
- 
- 
-
 Ataques Bit Flipping: Es el proceso de XORing bloques de texto plano con el bloque de texto cifrado anterior durante el descifrado lo que introducirá una vulnerabilidad de integridad de datos. Si echamos un vistazo a la tabla de verdad XOR, podemos ver que cambiar un bit de uno de los textos cifrados cambiará la salida de 0 a 1, o de 1 a 0:
 Texto cifra-do	Texto sin forma-to	Produc-ción
-0	0	0
-1	0	1
-0	1	1
-1	1	0
-
- 
 
 Qué usar en lugar de CBC - La forma más segura de evitar este problema es utilizar cifrado autenticado, que garantiza la integridad y la confidencialidad de los datos. Galois/Counter Mode (GCM) es una alternativa popular a CBC que proporciona cifrado autenticado con cifrados de bloque como AES. 
-Si realmente no tiene otra opción y necesita usar CBC, aún puede protegerlo calculando un código de auten-ticación de mensaje (MAC) a partir del texto cifrado, esto se puede hacer usando el algoritmo HMAC.
+
 2.5	CIFRADOS POST CUANTICOS 
+
 INTRODUCCION:
 La computación cuántica representara una amenaza significativa para los sistemas de seguridad actuales. Las computadoras cuánticas, gracias a su capacidad de realizar cálculos exponencialmente más rápidos que las computadoras clásicas, podrían romper de forma rápida algoritmos de cifrado actuales.
 RIESGOS: PUNTOS DEBILES:
