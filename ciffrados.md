@@ -10,7 +10,7 @@ Procolos SSL/TLS; SSL (Secure Sockets Layer) Capa de Conexiones Seguras. Es un p
 
 ### PROTOCOLOS RECOMENDADOS:
 
-**SSLv2** = no recomendado, los cifrados están todos rotos/vulnerados.
+**SSLv2 = no recomendado, los cifrados están todos rotos/vulnerados.**
 
 Cifrado débil: Usaba algoritmos obsoletos como MD5 y soportaba suites de cifrado inseguras.
 
@@ -20,13 +20,14 @@ Falta de protección por truncamiento: Permitía ataques de truncamiento de mens
 
 Sin soporte para SNI (Server Name Indication): Limitaba la configuración de hosts virtuales seguros.
 
-**SSLv3** = no recomendado, los cifrados están todos rotos/vulnerados. ¡Vulnerable a POODLE!
+**SSLv3 = no recomendado, los cifrados están todos rotos/vulnerados. ¡Vulnerable a POODLE!**
 
 POODLE (CVE-2014-3566): Permitía descifrar contenido mediante un ataque de padding oracle.
 
 Cifrados obsoletos: Aún permitía RC4 y otros algoritmos inseguros.
 
-**TLS1.0** = no recomendados, porque tienen vulnerabilidades propias el protocolo tls1.0 como BEAST (Browser Exploit Against SSL/TLS), aunque la suite tiene cifrados de trasporte como AES
+**TLS1.0 = no recomendados, porque tienen vulnerabilidades propias el protocolo tls1.0 como BEAST (Browser Exploit Against SSL/TLS), aunque la suite tiene cifrados de trasporte como AES**
+
 
 
 
