@@ -170,7 +170,7 @@ https://es.wikipedia.org/wiki/Criptograf%C3%ADa_postcu%C3%A1ntica
 ## CONJUNTO DE COMBINACIONES (CIPHER SUITE) RECOMENDADAS TLS
 Ejemplos de combinaciones TLS, recomendadas:  La combinación de: Intercambio de clave + firma + cifra-dos y tamaño de HASH > 128 + curva elíptica, hacen que un conjunto de cifrados (cipher suite) sea conside-rado segura!, lo que por sí solos o conjunto de dos, no lo son; (Se incluyen por ejemplo, los cifrados no re-comendaos “por si solos” ARIA y CAMELIA que si van acompañados de _GCM_ o _POLY1305 sí serian seguros! ):
 
-seguridad_alta.txt
+[seguridad_alta.txt](https://github.com/hackingyseguridad/cifrados/blob/main/seguridad_alta.txt)
 
 Combinación AES-256-CMAC
 MACsec (Seguridad de control de acceso a medios): Este protocolo aprovecha AES-256-CMAC para la verificación del origen de los datos y el cifrado en redes cableadas. Se podría combinar con otros algorit-mos como GCM (Galois/Counter Mode) para funciones de cifrado adicionales.
