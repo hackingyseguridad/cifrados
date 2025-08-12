@@ -334,7 +334,7 @@ chacha20-poly1305@openssh.com (alternativa rápida a AES)
 
 aes256-ctr (si no hay GCM disponible)
 
-⚠ Evitar:
+Evitar:
 
 3des-cbc (DES/3DES son obsoletos)
 
@@ -462,7 +462,7 @@ Por su propia naturaleza inalámbrica las redes wifi están expuestas a todo tip
 
 Abierta:  No utilizar
 WEP.:  No utilizar
-WPA.:   No utilizar
+WPA.:  No utilizar
 WPA2  con opción cifrado AES 128  – No utilizar cifrado TKIP
 WPA3  AES 128 ó 256
  
