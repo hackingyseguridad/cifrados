@@ -115,6 +115,7 @@ Qué usar en lugar de CBC - La forma más segura de evitar este problema es util
 ## CIFRADOS POST CUANTICOS 
 
 La computación cuántica representara una amenaza significativa para los sistemas de seguridad actuales. Las computadoras cuánticas, gracias a su capacidad de realizar cálculos exponencialmente más rápidos que las computadoras clásicas, podrían romper de forma rápida algoritmos de cifrado actuales.
+
 RIESGOS: PUNTOS DEBILES:
 1.- Diccionarios HASH, se podría comprobar diccionarios con millones de HASES en pocos segundos hasta dar con la palabra cifrada = HASH
 2.- La capacidad mayor de cómputo podría facilitar romper cifrados con nuevas vulnerabilidades, por inyec-ción u otras nuevas técnicas que están aún por descubrirse. con la tecnología cuántica se reducirá a segundos, cálculos que ahora requieren años.  Actualmente dependemos de la infraestructura PKI (entidad certificadora CA, certificado digital, clave publica y clave privada, autoridad registro, revocación.), que es la infraestructura que verifica la confianza, está basada en cifrados rotos como RSA o curva elíptica DH; RSA y DH se basan en la basan en la factorización, que requeriría años de cómputo con la tecnología actual. Con computación cuántica será fácilmente romper en poco tiempo, ya que se sabe cómo.  Por ejemplo: 
@@ -124,6 +125,7 @@ Algoritmo cuántico Shor (1994), permite descomponer en factores primos un numer
 Intercambio de claves públicas (cifrar) y clave privadas (descifrar) con Infraestructura de clave Publica ó PKI: 
 
 ### NUEVAS COMBINACIOJNES DE CIFRADOS POST CUANTICO:
+
 NIST lanza el 13 de agosto de 2024, los primeros estándares de cifrados, post cuánticos, que han sido nor-malizados:
 Se estima que en pocos años tendremos ya ordenadores cuánticos, accesibles para los todos los usuarios.
 Se crea la necesidad de crear nuevos algoritmos post cuánticos que resistan los ataques con tecnología cuánti-ca, combinados sobre los actuales cifrados utilizados.
@@ -168,29 +170,30 @@ https://pq-crystals.org/
 https://es.wikipedia.org/wiki/Criptograf%C3%ADa_postcu%C3%A1ntica 
 
 ## CONJUNTO DE COMBINACIONES (CIPHER SUITE) RECOMENDADAS TLS
-Ejemplos de combinaciones TLS, recomendadas:  La combinación de: Intercambio de clave + firma + cifra-dos y tamaño de HASH > 128 + curva elíptica, hacen que un conjunto de cifrados (cipher suite) sea conside-rado segura!, lo que por sí solos o conjunto de dos, no lo son; (Se incluyen por ejemplo, los cifrados no re-comendaos “por si solos” ARIA y CAMELIA que si van acompañados de _GCM_ o _POLY1305 sí serian seguros! ):
+
+Ejemplos de combinaciones TLS, recomendadas:  La combinación de: Intercambio de clave + firma + cifra-dos y tamaño de HASH > 128 + curva elíptica, hacen que un conjunto de cifrados (cipher suite) sea considerado segura !, lo que por sí solos o conjunto de dos, no lo son; (Se incluyen por ejemplo, los cifrados no recomendaos “por si solos” ARIA y CAMELIA que si van acompañados de _GCM_ o _POLY1305 sí serian seguros! ):
 
 [seguridad_alta.txt](https://github.com/hackingyseguridad/cifrados/blob/main/seguridad_alta.txt)
 
-Combinación AES-256-CMAC
+**Combinación AES-256-CMAC**
 MACsec (Seguridad de control de acceso a medios): Este protocolo aprovecha AES-256-CMAC para la verificación del origen de los datos y el cifrado en redes cableadas. Se podría combinar con otros algorit-mos como GCM (Galois/Counter Mode) para funciones de cifrado adicionales.
 Seguridad de pagos: Algunos sistemas de pago podrían utilizar AES-256 para el cifrado de datos y CMAC para la autenticación de mensajes, pero a menudo junto con otras medidas de seguridad como proto-colos de gestión de claves.
 En general, AES-256-CMAC es una combinación sólida para la seguridad de los datos, pero es un bloque de construcción más que una suite completa. Su uso a menudo depende de la aplicación específica y podría im-plementarse con algoritmos adicionales para una solución de seguridad más completa.
 AES-256-CMAC es una combinación sólida para la seguridad de los datos, pero es un bloque de construc-ción más que una suite completa. Su uso a menudo depende de la aplicación específica y podría implementar-se con algoritmos adicionales para una solución de seguridad más completa.
 
-Diffie-Hellman
+**Diffie-Hellman**
 Además de CVE-2022-20001 y los ataques Logjam, DHEAT ATTACK existen otras vulnerabilidades públicas que han explotado debilidades en el protocolo Diffie-Hellman (DH) o en su implementación:
 
-Vulnerabilidades en Bibliotecas Criptográficas
+**Vulnerabilidades en Bibliotecas Criptográficas**
 Heartbleed: Aunque principalmente asociado con OpenSSL, esta vulnerabilidad también podía afectar a implementaciones de DH en otras bibliotecas. Permitió a atacantes leer grandes cantidades de memoria del servidor, incluyendo claves privadas.
 DROWN: Esta vulnerabilidad explotaba la reutilización de claves SSL/TLS en combinación con pro-tocolos vulnerables como SSLv2. Al aprovechar esta debilidad, los atacantes podían descifrar sesiones SSL/TLS protegidas con DH.
 
-Ataques de Canal Lateral Específicos para DH
+**Ataques de Canal Lateral Específicos para DH**
 Ataques de timing: Estos ataques miden el tiempo que tarda un dispositivo en realizar ciertas opera-ciones criptográficas para inferir información sobre la clave secreta.
 Ataques de potencia: Al medir el consumo de energía de un dispositivo durante el cálculo de DH, los atacantes pueden obtener información sobre la clave secreta.
 Ataques de caché: Estos ataques aprovechan las características de las cachés de procesador para infe-rir información sobre la clave secreta.
 
-Vulnerabilidades Relacionadas con la Configuración
+**Vulnerabilidades Relacionadas con la Configuración**
 Uso de grupos DH débiles: La elección de grupos DH demasiado pequeños o con propiedades ma-temáticas débiles puede facilitar ataques de fuerza bruta.
 Falta de validación de parámetros: Si no se valida correctamente la entrada del usuario, los atacantes pueden proporcionar parámetros maliciosos que permitan ataques.
 Implementaciones inseguras de ECDH: El Elliptic Curve Diffie-Hellman (ECDH) es una variante de DH basada en curvas elípticas. Vulnerabilidades en su implementación pueden permitir ataques similares a los de DH.
@@ -214,7 +217,7 @@ Tunel: Datos de usuario se enviarán a través del túnel IKE fase
 IKE construye los túneles para nosotros, pero no autentica ni cifra los datos del usuario. Usamos otros dos protocolos para esto: AH (Encabezado de autenticación) ESP (carga útil de seguridad encapsulada) AH y ESP ofrecen autentica-ción e integridad, pero solo ESP admite el cifrado!
  
 ### IKE V1
-NO UTILIZAR   
+VULNERABLE !   
 
 ### IKE V2  
 IKEv2:
@@ -242,14 +245,19 @@ encryption aes-256
 integrity sha512
 group 21
 !
+
 4.	Importante también en la configuración es establecer Timeout: Tiempo de desconexión y volumen de tráfico: LifeTime: Time:10:0:0, Traffic Volumen: 36000
-4.	SSH/ SCP
+
+## SSH/ SCP
+
 SSH protocolo y programa que lo implementa cuya principal función es el acceso remoto a un servidor por medio de un canal seguro en el que toda la información está cifrada. Además de la conexión a otros dispositivos.
  
-4.1	SSH V1  
-NO UTILIZAR:
-4.2	SSH V2 
-Para SSH v2 por y para simplificar, como elemento principal de criterio utilizaremos fundamentalmente el cifrado de tras-porte (encryption_algoritms).
+**SSH V1**  
+VULNERABLE !
+
+**SSH V2**
+
+Para SSH v2 por y para simplificar, como elemento principal de criterio utilizaremos fundamentalmente el cifrado de trasporte (encryption_algoritms).  P.ej.: 
 
 SSH 2
 |   kex_algorithms: (10)
@@ -310,7 +318,7 @@ RECOMENDADOS: Cifrados de trasporte (encryption_algoritms): seguridad media: aes
 (server_host_key_algorithms), eliminar de la configuración RSA, como cifrado para la clave, y ofrecer por ejemplo como alternativas las combinaciones: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
 https://www.endpointdev.com/blog/2023/04/ssh-host-key/# 
 
-NO UTILIZAR: RSA, DSA, DES, 3des, MD5, blowfish, RC4.
+VULNERABLES:  RSA, DSA, DES, 3des, MD5, blowfish, RC4.
 
 key_algorithms, server_host_key_algorithms, mac_algorithms, compression_algorithms “sería poco relevantes” los ahí ofrecidos siempre y cuando los cifrados de trasporte(encryption_algorithms) permitidos sea los recomendados.
 
@@ -318,7 +326,8 @@ Desde la versión OpenSSH  8.8, el algoritmo de clave ssh-rsa ha sido deshabilit
 
 mac_algorithms: () recomendados hmac. Para evitar incidencias de clientes SSH que no soportan hmac, ofrecer por ahora tambien todas las combinaciones  umac.
 
-5.	PROTOCOLOS DE TRANSFERENCIA DE ARCHIVOS
+## PROTOCOLOS DE TRANSFERENCIA DE ARCHIVOS
+
 Protocolos de transferencia de archivos ( ftp ,  SFTP,  FTPS ó FTPES)
 
 FTP es un protocolo obsoleto y a través del cual la información viaja sin cifrar, por lo que puede quedar expuesta. 
