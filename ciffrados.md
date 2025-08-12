@@ -197,24 +197,30 @@ Implementaciones inseguras de ECDH: El Elliptic Curve Diffie-Hellman (ECDH) es u
 
 ## CONJUNTO DE CIFRADOS (CIPHER SUITE) NO RECOMENDADOS TLS
 
+### COMBINACIONES DE CIFRADO SEGURIDAD MEDIA BAJA
+
 [seguridad_media.txt](https://github.com/hackingyseguridad/cifrados/blob/main/seguridad_media.txt)
 
-seguridad_baja.txt
+### COMBINACIONES DE CIFRADOS ROTOS / VULNERABLES
 
-3.	IPSEC
+[seguridad_baja.txt](https://github.com/hackingyseguridad/cifrados/blob/main/seguridad_baja.txt)
+
+## IPSEC
+
 IPSec es un “conjunto de protocolos”: Protocolo 51 AH: (Integridad y autentificación).  y/ó Protocolo 50 ESP (En-capsulación): 
  
 Tunel: Datos de usuario se enviarán a través del túnel IKE fase 
  
 IKE construye los túneles para nosotros, pero no autentica ni cifra los datos del usuario. Usamos otros dos protocolos para esto: AH (Encabezado de autenticación) ESP (carga útil de seguridad encapsulada) AH y ESP ofrecen autentica-ción e integridad, pero solo ESP admite el cifrado!
  
-3.1	IKE V1
+### IKE V1
 NO UTILIZAR   
 
-3.2	IKE V2  
-  IKEv2:
+### IKE V2  
+IKEv2:
 
-1.	Cifrados recomendados y tamaño de hash:  AES ≥ 256, SHA-2 ≥  512  - No utilizar cifrados rotos: 3DES, MD5, RC4, SHA-1, RSA… (ver Tabla cifrados recomendados )
+1.	Combinaciones de cifrado recomendados y tamaño de hash:  AES ≥ 256, SHA-2 ≥  512  - No utilizar cifrados rotos: 3DES, MD5, RC4, SHA-1, RSA… (ver Tabla cifrados recomendados )
+   
 2.	Grupos DH Diffie-Hellman 
 
 Grupo Diffie-Hellman 2 - módulo de 1024 bits -   EVITAR
@@ -224,10 +230,13 @@ Grupo Diffie-Hellman 24: - ACEPTABLE
 Grupo Diffie-Hellman 19 - 256 bits curva eliptica –  RECOMENDADO
 Grupo Diffie-Hellman 20 - 384 bits curva eliptica –  RECOMENDADO
 Grupo Diffie-Hellman 21 - 512 bits curva eliptica –  RECOMENDADO
+
 https://safecurves.cr.yp.to/ 
+
 https://nvd.nist.gov/vuln/detail/CVE-2002-20001 
 
 3.	 Configuración propuesta “sin tener en cuenta incompatibilidades o rendimiento”:
+
 !crypto ikev2 policy 10
 encryption aes-256
 integrity sha512
