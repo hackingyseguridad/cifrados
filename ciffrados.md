@@ -26,35 +26,33 @@ TLS1.1 = no recomendados, decretado obsoleto el 13/01/2021. Deshabilitado de los
 
 ### CIFRADOS NO RECOMENDADOS, EN SUITE TLS U OTROS PROTOCOLOS:
 
-Los cifrados y combinaciones recomendadas detallados a continuación para los protocolos SSLv2, SSv3, TLS 1.0, TLS 1.1, TLS 1.2 y TLS 1.3, serían los mismos a considerar/utilizar, recomendados en caso de implementar o configurar cifrado en otros protocolos como por ejemplo:  SNMPv3, Telnet, sFTP, NFS, smtp, pop3, IMAP4, HTTP WWW, ...
+Los cifrados y combinaciones recomendadas para los protocolos SSLv2, SSv3, TLS 1.0, TLS 1.1, TLS 1.2 y TLS 1.3, serían los mismos en caso de implementar o configurar cifrado en protocolos como por ejemplo:  SNMPv3, Telnet, sFTP, NFS, smtp, pop3, IMAP4, HTTPs WWW, ...
 
-SSLV2, SSLV3, TLS 1.0, TLS 1.1
-
-Algoritmos cripto-gráficos	Hash; Longitudes de clave (bits)	Uso	Seguridad me-dia	Seguridad Alta
+SSLV2, SSLV3, TLS 1.0, TLS 1.1, TLS 1.2; algoritmos criptográficos y Hash; Longitudes de clave (bits) Uso Seguridad baja, rotos, vulnerables: **no utilizar:**
 				
-DES	40, 56	Cifrado	No utilizar	No utilizar
+DES	40, 56
 
-CAMELLIA	128	Cifrado	No utilizar	No utilizar
+CAMELLIA	128
 
-CAST	-	Cifrado	No utilizar	No utilizar
+CAST
 
-EXPORT	40	Cifrado	No utilizar	No utilizar
+EXPORT	40
 
-RC2	-	Cifrado	No utilizar	No utilizar
+RC2
 
-RC5	-	Cifrado	No utilizar	No utilizar
+RC5
 
-RC6	-	Cifrado	No utilizar	No utilizar
+RC6
 
-IDEA	-	Cifrado	No utilizar	No utilizar
+IDEA
 
-SERPENT	-	Cifrado	No utilizar	No utilizar
+SERPENT	
 
-FORTEZZA	 	Cifrado	No utilizar	No utilizar
+FORTEZZA
 
-TWIFISH	-	Cifrado	No utilizar	No utilizar
+TWIFISH
 
-GOST	256	Cifrado	No utilizar	No utilizar
+GOST	256
 
 PSK		Cifrado	No utilizar	No utilizar
 
