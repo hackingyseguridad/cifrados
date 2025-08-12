@@ -76,8 +76,6 @@ AES-CFB	128, 192, 256
 
 AES-CTR	128, 192, 256, 1024	Cifrado	1024, ≥ 128	≥ 256
 
-AES-GCM	128, 192, 256	Cifrado e Integridad	≥ 128	≥ 256
-
 AES-CCM	128, 192, 256	Cifrado e Integridad	≥ 128	≥ 256
 
 AES-CCM8	128, 192, 256	Cifrado e Integridad	≥ 128	≥ 256
