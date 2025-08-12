@@ -32,11 +32,11 @@ SSLV2, SSLV3, TLS 1.0, TLS 1.1, TLS 1.2; algoritmos criptográficos y Hash; Long
 				
 DES	40, 56
 
-CAMELLIA	128
+CAMELLIA 128
 
 CAST
 
-EXPORT	40
+EXPORT 40
 
 RC2
 
@@ -56,7 +56,7 @@ GOST	256
 
 PSK
 
-NULL sin cifrado
+NULL = sin cifrado
 
 UNDEFINED
 
@@ -98,13 +98,12 @@ SHA-2 	256, 384, 512	Hash, Hmac	≥  256	≥  384
 
 SHA-3	224, 256, 384, 512	Hash, Hmac	≥  224	≥  384
 
-(ECH)  Encrypted ClientHello  https://blog.cloudflare.com/es-es/encrypted-client-hello-es-es/ nuevo es-tándar que completa a TLS 1.3, el sistema de cifrado que usan las webs HTTPS. Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el usuario. - el SNI muestra al inicio de la conxexión el fqdn sin cifrar; Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el  usua-rio. ECH que impide el funcionamiento de los filtros de bloqueo de webs piratas.  
-Por ejemplo haciendo interceptación de tráfico en un PC con tecnicas MiTM, con SNI: 
+(ECH)  Encrypted ClientHello  https://blog.cloudflare.com/es-es/encrypted-client-hello-es-es/ nuevo es-tándar que completa a TLS 1.3, el sistema de cifrado que usan las webs HTTPS. Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el usuario. - el SNI muestra al inicio de la conxexión el fqdn sin cifrar; Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el  usua-rio. ECH que impide el funcionamiento de los filtros de bloqueo de webs piratas.  Por ejemplo haciendo interceptación de tráfico en un PC con tecnicas MiTM, con SNI: 
  
-AES en combinación de CBC (Cipher Block Chaining) no garantiza la integridad de los datos. CBC es un cifrado en bloque. Un cifrado de bloque es una función que tomará un bloque de texto sin forma-to (la entrada legible por humanos) de longitud n y una clave, y la usará para producir un bloque de texto cifrado de longitud N. 
+AES en combinación de CBC (Cipher Block Chaining) **no garantiza la integridad de los datos**. CBC es un cifrado en bloque. Un cifrado de bloque es una función que tomará un bloque de texto sin formato (la entrada legible por humanos) de longitud n y una clave, y la usará para producir un bloque de texto cifrado de longitud N. 
 AES es el cifrado de bloques más popular en este momento, según lo recomiendan tanto NIST como NSA, opera en bloques de 128 bits con claves de 128, 192 o 256 bits.
 
-El problema aquí es que una función destinada a recibir entradas de 128 bits no cifrará una gran canti-dad de datos en una sola llamada. Cuando se enfrenta a ese problema, la solución intuitiva es simplemente dividir sus datos en múltiples bloques de 128 bits y simplemente llamar a AES con la misma clave en cada uno de ellos.
+El problema aquí es que una función destinada a recibir entradas de 128 bits no cifrará una gran cantidad de datos en una sola llamada. Cuando se enfrenta a ese problema, la solución intuitiva es simplemente dividir sus datos en múltiples bloques de 128 bits y simplemente llamar a AES con la misma clave en cada uno de ellos.
 No es seguro porque los patrones de datos pueden permanecer y servir como base para el análisis. CBC tiene como objetivo resolver esto agregando aleatoriedad a cada llamada al cifrado de bloque aplicando la operación exclusiva o (XOR) a cada bloque de texto sin formato con el bloque de texto cifrado generado previamente (o un vector de inicialización aleatorio, para el primer bloque). El descifrado funciona realizan-do el proceso a la inversa y aplicando XOR a cada texto sin formato generado con el texto cifrado anterior.
 
 Ataques Bit Flipping: Es el proceso de XORing bloques de texto plano con el bloque de texto cifrado anterior durante el descifrado lo que introducirá una vulnerabilidad de integridad de datos. Si echamos un vistazo a la tabla de verdad XOR, podemos ver que cambiar un bit de uno de los textos cifrados cambiará la salida de 0 a 1, o de 1 a 0:
