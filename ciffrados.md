@@ -197,7 +197,7 @@ Implementaciones inseguras de ECDH: El Elliptic Curve Diffie-Hellman (ECDH) es u
 
 ## CONJUNTO DE CIFRADOS (CIPHER SUITE) NO RECOMENDADOS TLS
 
-seguridad_media.txt
+[seguridad_media.txt](https://github.com/hackingyseguridad/cifrados/blob/main/seguridad_media.txt)
 
 seguridad_baja.txt
 
