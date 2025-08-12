@@ -1,10 +1,12 @@
 #!/bin/sh
 # Script to extract IPs and vulnerable ciphers from Nmap SSL scan results
-
-nmap -iL ip.txt --script=ssl-enum-ciphers -PE -sTV --open -n --randomize-hosts --max-retries 2 --min-rate 999 -oN resultado.txt
-
+#
+# http://www.hackingyseguridad.com/
+#
+#
+nmap -v0 -iL ip.txt -F --script=ssl-enum-ciphers -PE -sTV --open -n --randomize-hosts --max-retries 2 --min-rate 999 -oN resultado.txt
 echo "cifrados debiles"
-echo "SSLv2  EXPORT LOW  DES  RC4  MD5 NULL" 
+echo "SSLv2  EXPORT LOW  DES  RC4  MD5 NULL"
 echo "====================================="
 
 current_ip=""
@@ -37,7 +39,3 @@ if [ $vulnerable_found -eq 1 ]; then
 fi
 
 exit 0
-
-
-
-
