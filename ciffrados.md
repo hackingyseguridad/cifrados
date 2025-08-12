@@ -284,59 +284,84 @@ VULNERABLE !
 
 Para SSH v2 por y para simplificar, como elemento principal de criterio utilizaremos fundamentalmente el cifrado de trasporte (encryption_algoritms).  P.ej.: 
 
-SSH 2
-|   kex_algorithms: (10)
-|       curve25519-sha256
-|       curve25519-sha256@libssh.org
-|       ecdh-sha2-nistp256
-|       ecdh-sha2-nistp384
-|       ecdh-sha2-nistp521
-|       diffie-hellman-group-exchange-sha256
-|       diffie-hellman-group16-sha512
-|       diffie-hellman-group18-sha512
-|       diffie-hellman-group14-sha256
-|       diffie-hellman-group14-sha1
-|   … mínimo diffie-hellman-group14, modulo 2048
-|   server_host_key_algorithms: (5)
-|       rsa-sha2-512
-|       rsa-sha2-256
-|       ssh-rsa 
-|       ecdsa-sha2-nistp256
-|       ssh-ed25519
-|   encryption_algorithms: (17)
-|       aes256-gcm
-|       aes192-gcm
-|       aes128-gcm
-|       aes256-ctr
-|       aes192-ctr
-|       aes128-ctr
-|       chacha20-poly1305@openssh.com
-|       sha-1
-|       md5
-|       DES
-|       3des-cbc
-|       arcfour (RC4)
-|       arcfour128 (RC4 128)
-|       arcfour256 (RC4 256)
-|       blowfish-cbc
-|       cast128-cbc
-|
-|   mac_algorithms: (12)
-|       hmac-md5
-|       umac-64-etm@openssh.com
-|       umac-128-etm@openssh.com
-|       hmac-sha2-256-etm@openssh.com
-|       hmac-sha2-512-etm@openssh.com
-|       hmac-sha1-etm@openssh.com
-|       umac-64@openssh.com
-|       umac-128@openssh.com
-|       hmac-sha2-256
-|       hmac-sha2-512
-|       hmac-sha1
-|       SM3 HMAC algorithm
-|   compression_algorithms: (2)
-|       none
-|_      zlib@openssh.com
+1. Key Exchange (KEX) - kex_algorithms
+
+Los siguientes son modernos y resistentes a ataques cuánticos (PQC):
+
+curve25519-sha256 (el más seguro, preferido)
+
+curve25519-sha256@libssh.org
+
+ecdh-sha2-nistp256 (NIST P-256, aceptable pero menos preferido que Curve25519)
+
+ecdh-sha2-nistp384 (NIST P-384, aceptable)
+
+diffie-hellman-group16-sha512 (DH de 8192 bits, seguro)
+
+diffie-hellman-group18-sha512 (DH de 8192 bits, seguro)
+
+Evitar:
+
+diffie-hellman-group14-sha1 (SHA-1 es inseguro)
+
+Cualquier DH con módulo < 2048 bits (ej: diffie-hellman-group1-sha1).
+
+2. Host Key Algorithms (server_host_key_algorithms)
+Los más seguros:
+
+ssh-ed25519 (el mejor, basado en Curve25519)
+
+rsa-sha2-512 (RSA ≥ 4096 bits)
+
+rsa-sha2-256 (RSA ≥ 3072 bits)
+
+ecdsa-sha2-nistp256 (NIST P-256, aceptable)
+
+Evitar:
+
+ssh-rsa (sin sufijo SHA-2, vulnerable si se usa SHA-1).
+
+3. Encryption Algorithms (encryption_algorithms)
+Seguros:
+
+aes256-gcm (AEAD, mejor opción)
+
+aes192-gcm
+
+aes128-gcm
+
+chacha20-poly1305@openssh.com (alternativa rápida a AES)
+
+aes256-ctr (si no hay GCM disponible)
+
+⚠ Evitar:
+
+3des-cbc (DES/3DES son obsoletos)
+
+arcfour (RC4) (roto desde 2015)
+
+blowfish-cbc, cast128-cbc (débiles)
+
+sha-1, md5 (hash inseguros).
+
+4. MAC Algorithms (mac_algorithms)
+Seguros (solo en modo ETM o HMAC-SHA2):
+
+hmac-sha2-256-etm@openssh.com
+
+hmac-sha2-512-etm@openssh.com
+
+umac-128-etm@openssh.com
+
+Evitar:
+
+hmac-md5, hmac-sha1 (obsoletos).
+
+5. Compression (compression_algorithms)
+none (recomendado, evita ataques como CRIME).
+
+Evitar zlib@openssh.com (puede tener fugas de información).
+
 
 RECOMENDADOS: Cifrados de trasporte (encryption_algoritms): seguridad media: aes-128-GCM, aes-192-GCM, seguridad alta: aes-256-GCM,  CHACHA20+POLY1305. ( AES = también llamado Rijndael )
 
@@ -351,6 +376,19 @@ key_algorithms, server_host_key_algorithms, mac_algorithms, compression_algorith
 Desde la versión OpenSSH  8.8, el algoritmo de clave ssh-rsa ha sido deshabilitado. En versiones anteriores, podemos deactivarlo a mano, editando en el fichero /etc/ssh/sshd_config, y eliminando de Host KeyAlgorithms +ssh-rsa:
 
 mac_algorithms: () recomendados hmac. Para evitar incidencias de clientes SSH que no soportan hmac, ofrecer por ahora tambien todas las combinaciones  umac.
+
+Configuración Óptima para SSH (ejemplo en /etc/ssh/sshd_config)
+
+KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512
+
+HostKeyAlgorithms ssh-ed25519,rsa-sha2-512,rsa-sha2-256
+
+Ciphers aes256-gcm@openssh.com,chacha20-poly1305@openssh.com,aes256-ctr
+
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+
+Compression no
+
 
 ## PROTOCOLOS DE TRANSFERENCIA DE ARCHIVOS
 
