@@ -1,4 +1,11 @@
 ### cifrados
 
-cifrados recomendadodos https://github.com/hackingyseguridad/cifrados/blob/main/ciffrados.md
+
+
+
+### cifrados recomendadodos: 
+https://github.com/hackingyseguridad/cifrados/blob/main/ciffrados.md
+
+http://www.hackingyseguridad.com/
+
 
