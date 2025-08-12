@@ -2,7 +2,7 @@
 
 ### Escaneo 
 
-sh scan_cifrados.sh
+sh scan_cifrados.sh IP
 
 ### cifrados recomendadodos: 
 
