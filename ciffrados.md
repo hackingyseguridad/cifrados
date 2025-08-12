@@ -1,12 +1,12 @@
 Cifrados recomendados
  
-INTRODUCCIÓN
+## INTRODUCCIÓN
 
 Se analizan los protocolos y cifrados rotos/vulnerados y se elabora un documento que sirva de referencia con los ci-frados recomendados, nivel de seguridad media y nivel de seguridad alta.
 
-SSL/TLS 
+## SSL/TLS 
 
-SSL/TLS; SSL (Secure Sockets Layer) Capa de Conexiones Seguras. Es un protocolo que hace uso de certificados digitales para establecer comunicaciones seguras a través de Internet y utiliza un paquete de cifrados “Cipher Suite”.
+Procolos SSL/TLS; SSL (Secure Sockets Layer) Capa de Conexiones Seguras. Es un protocolo que hace uso de certificados digitales para establecer comunicaciones seguras a través de Internet y utiliza un paquete de cifrados “Cipher Suite”.
 
 PROTOCOLOS RECOMENDADOS:
 
