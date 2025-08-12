@@ -22,7 +22,7 @@ TLS1.1 = no recomendados, decretado obsoleto el 13/01/2021. Deshabilitado de los
 
 **TLS1.2 = si es recomendado, con cifrados: AES > 128 GCM y o CHACHA20+POLY1305 256**
 
-**TLS1.3 = si es recomendado, con la suite de cifrados que ofrece.**
+**TLS1.3 = si es recomendado, con la suite de cifrados actuales que ofrece.**
 
 ### CIFRADOS NO RECOMENDADOS, EN SUITE TLS U OTROS PROTOCOLOS:
 
@@ -54,27 +54,25 @@ TWIFISH
 
 GOST	256
 
-PSK		Cifrado	No utilizar	No utilizar
+PSK
 
-NULL sin cifrado	-	Cifrado	No utilizar	No utilizar
+NULL sin cifrado
 
-UNDEFINED	-	Cifrado	No utilizar	No utilizar
+UNDEFINED
 
 TLS1.2
-
-Algoritmos cripto-gráficos	Hash; Longitudes de clave (bits)	Uso	Seguridad me-dia	Seguridad Alta
 				
-3DES 	128, 192	Cifrado	No utilizar	No utilizar
+3DES 	128, 192
 
-ARIA	128, 256	Cifrado	No utilizar	No utilizar
+ARIA	128, 256
 
-RC4 o ARC4 	 64-2048	Cifrado	No utilizar	No utilizar
+RC4 o ARC4 	 64-2048
 
-AES-ECB	128, 192, 256	Cifrado	No utilizar	No utilizar
+AES-ECB	128, 192, 256
 
-AES-CBC	128, 192, 256	Cifrado	No utilizar	≥ 256
+AES-CBC	128, 192, 256
 
-AES-CFB	128, 192, 256	Cifrado	≥ 128	≥ 256
+AES-CFB	128, 192, 256
 
 AES-CTR	128, 192, 256, 1024	Cifrado	1024, ≥ 128	≥ 256
 
@@ -86,56 +84,26 @@ AES-CCM8	128, 192, 256	Cifrado e Integridad	≥ 128	≥ 256
 
 AEAD	128, 192, 256	Integridad	≥ 128	≥ 256
 
-CHA-CHA20+POLY1305	256	Cifrado e Integridad	256	256
+RSA	1024, 2048, 3072, 4096	Intercambio de clave o Firma 	
 
-RSA	1024, 2048, 3072, 4096	Intercambio de clave o Firma 	No utilizar	≥ 3072
-
-DH	1024, 2048, 3072, 4096	Intercambio de clave		≥ 3072
+DH	1024, 2048, 3072, 4096	Intercambio de clave	
 
 ECDH	256, 384, 512	Intercambio de clave	≥ 256	≥ 384
 
 ECDSA	256, 384, 512	Firma	≥ 256	≥ 384
 
-MD5	128	Hash	No utilizar	No utilizar
+MD5	128	Hash	
 
-SHA-1	160	Hash	No utilizar	No utilizar
+SHA-1	160	Hash	
 
 SHA-2 	256, 384, 512	Hash, Hmac	≥  256	≥  384
 
 SHA-3	224, 256, 384, 512	Hash, Hmac	≥  224	≥  384
 
-TLS1.3
-
-Algoritmos cripto-gráficos	Hash; Longitudes de clave (bits)	Uso	Seguridad me-dia	Seguridad Alta
-				
-AES-GCM	128, 192, 256	Cifrado e Integridad	≥ 128	≥ 256
-
-CHA-CHA20+POLY1305	256	Cifrado e Integridad	256	256
-
-RSA	2048, 3072, 4096	Firma 	≥ 2048	≥ 3072
-
-DH	2048, 3072, 4096	Intercambio de clave	≥ 2048	≥ 3072
-
-ECDH	256, 384, 512	Intercambio de clave	≥ 256	≥ 384
-
-ECDSA	256, 384, 512	Firma	≥ 256	≥ 384
-
-SHA-2 	256, 384, 512	Hash	≥  256	≥  384
-
-SHA-3	224, 256, 384, 512	Hash	≥  256	≥  384
-
 (ECH)  Encrypted ClientHello  https://blog.cloudflare.com/es-es/encrypted-client-hello-es-es/ nuevo es-tándar que completa a TLS 1.3, el sistema de cifrado que usan las webs HTTPS. Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el usuario. - el SNI muestra al inicio de la conxexión el fqdn sin cifrar; Sin ECH, aunque una web esté cifrada, el nombre del dominio al que se accede se transmite en texto plano en el campo SNI, de forma que un intermediario puede saber dónde está navegando el  usua-rio. ECH que impide el funcionamiento de los filtros de bloqueo de webs piratas.  
 Por ejemplo haciendo interceptación de tráfico en un PC con tecnicas MiTM, con SNI: 
  
-- el navegado Google Chrome permite habilitar ECH, cifra el CLienthello extremo a extremo desde  el inicio  https://chromeenterprise.google/intl/en_ca/policies/#EncryptedClientHelloEnabled    
-Configurar Google Chrome con la url : chrome://flags/
-Web para auto-chequear los cifrados permitidos en la configuración actual por nuestro navegador Web:
-https://clienttest.ssllabs.com:8443/ssltest/viewMyClient.html 
-
-AES en combinación de CBC (Cipher Block Chaining) no garantiza la integridad de los datos.
-
-CBC es un cifrado en bloque. Un cifrado de bloque es una función que tomará un bloque de texto sin forma-to (la entrada legible por humanos) de longitud n y una clave, y la usará para producir un bloque de texto cifrado de longitud N. 
-
+AES en combinación de CBC (Cipher Block Chaining) no garantiza la integridad de los datos. CBC es un cifrado en bloque. Un cifrado de bloque es una función que tomará un bloque de texto sin forma-to (la entrada legible por humanos) de longitud n y una clave, y la usará para producir un bloque de texto cifrado de longitud N. 
 AES es el cifrado de bloques más popular en este momento, según lo recomiendan tanto NIST como NSA, opera en bloques de 128 bits con claves de 128, 192 o 256 bits.
 
 El problema aquí es que una función destinada a recibir entradas de 128 bits no cifrará una gran canti-dad de datos en una sola llamada. Cuando se enfrenta a ese problema, la solución intuitiva es simplemente dividir sus datos en múltiples bloques de 128 bits y simplemente llamar a AES con la misma clave en cada uno de ellos.
@@ -146,9 +114,8 @@ Texto cifra-do	Texto sin forma-to	Produc-ción
 
 Qué usar en lugar de CBC - La forma más segura de evitar este problema es utilizar cifrado autenticado, que garantiza la integridad y la confidencialidad de los datos. Galois/Counter Mode (GCM) es una alternativa popular a CBC que proporciona cifrado autenticado con cifrados de bloque como AES. 
 
-2.5	CIFRADOS POST CUANTICOS 
+## CIFRADOS POST CUANTICOS 
 
-INTRODUCCION:
 La computación cuántica representara una amenaza significativa para los sistemas de seguridad actuales. Las computadoras cuánticas, gracias a su capacidad de realizar cálculos exponencialmente más rápidos que las computadoras clásicas, podrían romper de forma rápida algoritmos de cifrado actuales.
 RIESGOS: PUNTOS DEBILES:
 1.- Diccionarios HASH, se podría comprobar diccionarios con millones de HASES en pocos segundos hasta dar con la palabra cifrada = HASH
@@ -164,13 +131,13 @@ Se crea la necesidad de crear nuevos algoritmos post cuánticos que resistan los
  
 Se crea nuevas combinaciones para con los cifrados actuales, para mitigar posibles ataques: 
 CRYSTAL-KYBER ó ML-KEM (Module Lattice Key-Based Encapsulation Mechanism), meca-nismo de encapsulamiento de claves que permite a dos partes intercambiar una clave secreta com-partida de manera segura ML-KEM, un mecanismo de encapsulación de claves seleccionado para cifrado general, como para acceder a sitios web seguros:  ML-KEM-512, ML-KEM-768, ML-KEM-1024
-ML-KEM (Module Lattice Key Encapsulation Mechanism) o crystal - KYBER, basada en una estructura compleja o reticulos, se utiliza principalmente para el intercambio seguro de claves encriptadas. Esto significa que si dos disposi-tivos quieren comunicarse de forma segura, pueden usar ML-KEM para generar una clave secreta que solo ellos co-nozcan, y luego usar esa clave para cifrar sus mensajes. Resistencia a ataques cuánticos: . Eficiencia: ML-KEM es relativamente eficiente en términos de tiempo de cálculo y tamaño de clave, lo que lo hace adecuado para su imple-mentación en una amplia variedad de dispositivos. Seguridad: ML-KEM se basa en problemas matemáticos que se consideran difíciles de resolver, incluso para las computadoras cuánticas.
+**ML-KEM (Module Lattice Key Encapsulation Mechanism) o crystal - KYBER**, basada en una estructura compleja o reticulos, se utiliza principalmente para el intercambio seguro de claves encriptadas. Esto significa que si dos disposi-tivos quieren comunicarse de forma segura, pueden usar ML-KEM para generar una clave secreta que solo ellos co-nozcan, y luego usar esa clave para cifrar sus mensajes. Resistencia a ataques cuánticos: . Eficiencia: ML-KEM es relativamente eficiente en términos de tiempo de cálculo y tamaño de clave, lo que lo hace adecuado para su imple-mentación en una amplia variedad de dispositivos. Seguridad: ML-KEM se basa en problemas matemáticos que se consideran difíciles de resolver, incluso para las computadoras cuánticas.
 Se integrará en OpenSSH, en la suite cifrados ofrecidas para la versión de TLS 1.X: como firma, intercambio seguro de claves; este proceso permite a dos partes establecer una comunicación segura sin compartir una clave secreta de ante-mano. Esto se hace actualmente mediante algoritmos rotos: Diffie-Hellman, ECDH, RSA, RCC,  Elliptic Curve Digital Signature Algorithm (ECDSA), PBKDF  que utilizan pares de claves: una pública y otra privada, fundamentales para muchos protocolos de seguridad, como TLS, ssh, VPN, …
  
 p.ej. TLS 1.x  ( AES_256_CGM +  SHA384 ) Protocolo ( Cifrado y modo + HASH algoritmo ) ; cifrado AES, tamaño cadena HASH 256, modo CGM +  HASH algoritmo SHA384, que hace de control de integridad  - será  ML-KEM-512  - 1024 el que se encargara del intercambio de claves segura, combinado en conjunto con AES-256-GCM
 https://csrc.nist.gov/pubs/fips/203/ipd 
 CRYSTAL-Dilithium ó ML-DSA (Module Lattice Digital Signature Algorithm),  para firma digital. ML-DSA, un algoritmo basado en red elegido para protocolos de firma digital de propósito general .
-ML-DSA (Module Lattice Digital Signature Algorithm) o Cristal Dilitium, basada en una estructura compleja o retículos, se utiliza principalmente para la firma digital de documentos. Esto significa que se emplea para:
+**ML-DSA (Module Lattice Digital Signature Algorithm) o Cristal Dilitium**, basada en una estructura compleja o retículos, se utiliza principalmente para la firma digital de documentos. Esto significa que se emplea para:
 Autenticar la identidad del firmante: Al firmar un documento digitalmente con ML-DSA, se garantiza que la persona que lo firmó es quien dice ser.
 Verificar la integridad del documento: ML-DSA permite verificar si un documento ha sido alterado desde que fue firmado. Esto es fundamental para garantizar la confiabilidad de los documentos digitales.
 Firma digital de documentos: Para garantizar la autenticidad, integridad y no repudio de documentos elec-trónicos.
@@ -179,7 +146,7 @@ Protección de software: Para garantizar la integridad del software y evitar la 
 Blockchain: Para asegurar la integridad y transparencia de las transacciones en las blockchains.
 https://csrc.nist.gov/pubs/fips/204/ipd  
 
-SPHICIS SLH-DSA ó (Stateless Hash-Based Digital Signature), algoritmo de firma digital basado en hash, evita ataques de diccionario HASH. SLH-DSA, un esquema de firma digital basado en hash sin estado.
+**SPHICIS SLH-DSA ó (Stateless Hash-Based Digital Signature)**, algoritmo de firma digital basado en hash, evita ataques de diccionario HASH. SLH-DSA, un esquema de firma digital basado en hash sin estado.
 SLH-DSA, o Stateless Hash-Based Digital Signature Algorithm, o SPHINICS +, basado en HASH,  se utili-za principalmente para la firma digital de documentos, pero con una característica distintiva: no requiere un estado interno. Esto significa que cada firma es independiente de las anteriores, lo que lo hace especialmente útil en situaciones donde:
 La seguridad a largo plazo es crucial: SLH-DSA ofrece una mayor resistencia a ataques a largo plazo, ya que cada firma es independiente y no compromete la seguridad de firmas anteriores.
 Se requiere una alta eficiencia: Al no requerir un estado interno, SLH-DSA puede ser más eficiente en térmi-nos de tiempo de cálculo y tamaño de clave en ciertas aplicaciones.
@@ -200,6 +167,8 @@ https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-po
 https://csrc.nist.gov/Projects/Post-Quantum-Cryptography 
 https://pq-crystals.org/ 
 https://es.wikipedia.org/wiki/Criptograf%C3%ADa_postcu%C3%A1ntica 
+
+
 2.6	CONJUNTO DE COMBINACIONES (CIPHER SUITE) RECOMENDADAS TLS
 Ejemplos de combinaciones TLS, recomendadas:  La combinación de: Intercambio de clave + firma + cifra-dos y tamaño de HASH > 128 + curva elíptica, hacen que un conjunto de cifrados (cipher suite) sea conside-rado segura!, lo que por sí solos o conjunto de dos, no lo son; (Se incluyen por ejemplo, los cifrados no re-comendaos “por si solos” ARIA y CAMELIA que si van acompañados de _GCM_ o _POLY1305 sí serian seguros! ):
 
