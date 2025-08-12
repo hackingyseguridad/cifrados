@@ -1,5 +1,4 @@
-Cifrados recomendados
- 
+
 ## INTRODUCCIÓN
 
 Se analizan los protocolos y cifrados rotos/vulnerados y se elabora un documento que sirva de referencia con los cifrados recomendados con: nivel de seguridad media y nivel de seguridad alta.
