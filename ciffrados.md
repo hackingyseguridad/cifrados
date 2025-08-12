@@ -339,9 +339,10 @@ SSH 2
 |       none
 |_      zlib@openssh.com
 
-RECOMENDADOS: Cifrados de trasporte (encryption_algoritms): seguridad media: aes-128-xxx, aes-192-xxx, seguri-dad alta: aes-256-xxx,  CHACHA20+POLY1305. ( AES = también llamado Rijndael )
+RECOMENDADOS: Cifrados de trasporte (encryption_algoritms): seguridad media: aes-128-GCM, aes-192-GCM, seguridad alta: aes-256-GCM,  CHACHA20+POLY1305. ( AES = también llamado Rijndael )
 
 (server_host_key_algorithms), eliminar de la configuración RSA, como cifrado para la clave, y ofrecer por ejemplo como alternativas las combinaciones: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+
 https://www.endpointdev.com/blog/2023/04/ssh-host-key/# 
 
 VULNERABLES:  RSA, DSA, DES, 3des, MD5, blowfish, RC4.
@@ -363,7 +364,10 @@ FTPES, FTPS y SFTP, son seguros. FTPES, FTPS pues implementa el protocolo TLS, m
 - es importante que en el caso de TLS se ofrezca la versión 1.3 o 1.2 y cifrados recomendados, ya que las anteriores son obsoletas y no son seguras.
 
 - Para SFTP, tendremos en cuenta las recomendaciones para SSH descritas en el Punto 4 ( SSHv2), anterior
-6.	PGP/GPG Y  S/MINE
+
+
+## PGP/GPG Y  S/MINE
+
 Las capas de cifrado de archivos son protocolos que aprovechan uno (o varios) de los algoritmos para cifrar datos en reposo y en tránsito. Puede "superponer" algoritmos para complementar sus funciones de seguridad o proporcionar seguridad adicional. Por ejemplo, puede usar TLS para cifrar los archivos que está transfiriendo a través de la nube y anular el cifrado PGP en los archivos que está transfiriendo a través de un canal TLS para mayor seguridad.
 PGP ofrece cifrado, autenticación de e-mail y comprobación de su integridad. Combinaciones de cifrado recomenda-das en PGP/GPG
 
@@ -414,7 +418,9 @@ AES-Twofish-Serpent+SHA512
 
 AES 1024, “seguridad Militar” !!! utilizada para cifrar datos en almacenamientos, memorias y discos duros; Sylvain Pelissier y Bio Sletterink han encontrado una manera de descifrar AES de 1024 bits; Descubrieron que se ha utilizado un método de tipo CTR (Contador) para el cifrado, de solo 128 bits. El elemento básico de las claves para crear una clave de 1024 bits usó el PBKDF2, y luego con la adi-ción de un valor salt y un valor entero una vez que se conoce la contraseña. Luego, el elemento de 1024 bits se crea mediante bloques de cifrado de 128 bits, con la adición de las derivaciones de claves: CVE-2021–36750
 
-8.	WIFI
+
+## WIFI
+
 Por su propia naturaleza inalámbrica las redes wifi están expuestas a todo tipo de ataques remotos que pue-den lanzarse desde equipos situados en las inmediaciones. Pueden ser de intermediario (Man-in-the-Middle) donde el actor malicioso intercepta y altera la comunicación entre router y cliente, de recuperación de clave mediante fuerza bruta y diccionario para averiguar la contraseña de la red, de descifrado del tráfico para leer el contenido de la comunicación y de denegación de servicio, con el fin de sobrecargar la red e interrumpir su normal funcionamiento o expulsar clientes.
 
 Abierta:  No utilizar
@@ -432,7 +438,7 @@ Recomendaciones:
 -	Desactivar WPS (Wifi Protected Setup): vulnerable a ataques de fuerza bruta.
 -	Actualizar el firmware del router: última versión disponible, que corrija vulnerabilidades conocidas como p.ej. KRACK y Dragonblood.
 
-Wifi 4 (802.11n - 2009)
+### Wifi 4 (802.11n - 2009)
 
 Cifrados; WEP (obsoleto, inseguro). WPA-TKIP (vulnerable). WPA2-AES (recomendado, vulnerable a KRACK).
 Vulnerabilidades: 
@@ -440,58 +446,15 @@ KRACK Attack (Key Reinstallation Attack) Afecta a WPA2 en dispositivos 802.11n. 
 Cifrado TKIP. WPA-TKIP puede ser descifrado con ataques de fuerza bruta.
 Falta de protección en bandas de 2.4 GHz y 5 GHz. susceptible a interferencias y ataques de deautenticación.
 
-Wifi 5 (802.11ac - 2014)
+### Wifi 5 (802.11ac - 2014)
 
 Cifrados:
 WPA2-AES (predeterminado, vulnerable a KRACK).
 WPA3 (soporte opcional, más seguro).
 Vulnerabilidades: KRACK Attack . Dragonblood Attack Ataques de deautenticación.
 
-Wi-Fi 6 (802.11ax - 2019)
+### WiFi 6 (802.11ax - 2019)
 
 Cifrados utilizados: WPA3-SAE, WPA3-Enterprise (192-bit AES) (máxima seguridad) Enhanced Open (OWE) para redes públicas.
 Vulnerabilidades: Dragonblood Attack. Ataques de canal lateral. DoS por inundación de frames.
-
-
-9.	RESUMEN DE RECOMENDACIONES
-Nº 	 	Ámbito 	Resumen 	TLS 1.2 	TLS 1.3 
-1  	 	General 	Usar la versión del protocolo TLS 1.2 o superior. Deshabilitar en el servidor ofrecer las versiones anteriores a TLS 1.2.  	Aplica 	Aplica
-
-2	 	VPN SSL 	Para Sistemas ENS: Utilizar productos Cualificados de la fa-milia Redes Privadas Virtuales SSL dentro del Catálogo de Productos de Seguridad TIC (CPSTIC).  	Aplica 	Aplica
-			Para Sistemas que manejen información clasificada: Utilizar productos Aprobados dentro del Catálogo de 		
-			Productos de Seguridad TIC (CPSTIC) 		
-3	 	Key 
-Exchange 	No utilizar claves pre-compartidas (PSK). 	Aplica 	Aplica
-4		Key 
-Exchange 	Usar DHE o ECDHE.  	Aplica 	No Aplica
-			No usar RSA ni DH o ECDH estáticos. 		
-5		Key 
-Exchange 	Soporte de Curvas Elípticas. 	Aplica 	No Aplica
-6		Key 
-Exchange 	Soporte de la extensión Supported_Groups. 	Aplica 	No Aplica
-7		Autentica-ción Web y SSH	Autenticación Clave ó  key, solp permite conexiones de clien-tes cuya clave coincida con la del servidor. La clave privada se coloca en tu máquina local y la clave pública se carga en el servidor. Usar certificados X.509v3 de tipo RSA o ECDSA.	Aplica	Aplica
-8		Firma 	Usar la extensión signature_algorithms. Emplear algoritmos de firma RSA o ECDSA, con funciones SHA-2 o superior. 	Aplica 	No Aplica
-9  		Autentica-ción y Firma 	Usar claves públicas con fortaleza superior a 112 bits. Para categoría ALTA del ENS o sistemas clasificados, usar una fortaleza superior a 128 bits (RSA ≥ 3072 bits, ECDSA ≥ 256 bits). 	Aplica 	Aplica
-10		Cifrado 	Usar AES en modo GCM 	Aplica 	No Aplica
-11		Hash 	Usar funciones hash SHA-2 o superior.  No utilizar SHA-3	Aplica 	No Aplica
-12	 	Cipher
-Suites 	Hacer uso de alguna de las siguientes cipher suites (TLS 1.2):  
-
-Habilitar HSTS en el servidor web incluir cabecera que fuerce cifrado desde el inicio:
-Header always set Strict-Transport-Security «max-age=31536000; includeSubDomains»	Aplica 	No Aplica
-			CHACHA20+POLY1305 256		
-			TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 		
-			TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 		
-			TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 		
-			TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 		
-13	Certificados 	No utilizar certificados auto-firmados, sino emitidos por una CA de confianza, con flujos OSCP para verificación hacia la PKI	Aplica 	Aplica
-14	Certificados 	Usar autenticación mutua entre cliente y servidor TLS, de forma que no solo el servidor proporcione un certificado, sino también el cliente. 	Aplica 	Aplica
-15	Certificados 	Implementar validación de certificados según RFC 5280. 	Aplica 	Aplica
-16	Certificados 	Implementar verificación del estado de revocación del certi-ficado a través de listas CRLs o protocolo OCSP. 	Aplica 	Aplica
-17	Certificados 	Soportar una cadena de, al menos, tres (3) certificados. 	Aplica 	Aplica
-18  	Certificados 	Servidor y cliente TLS deben rechazar la conexión TLS cuando el certificado no haya superado el proceso de validación.  	Aplica 	Aplica
-18  	Certificados 	Servidor y cliente TLS deben rechazar la conexión TLS cuando no pueda verificarse el estado de revocación del certificado.  	Aplica 	Aplica
-		En caso de que el entorno operativo no lo permita, el esta-blecimiento de la conexión deberá ser aprobado por un ad-ministrador. 		
-19	Certificados 		Aplica 	Aplica
-				
 
