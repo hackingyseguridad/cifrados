@@ -28,10 +28,13 @@ Cifrados obsoletos: Aún permitía RC4 y otros algoritmos inseguros.
 
 **TLS1.0 = no recomendados, porque tienen vulnerabilidades propias el protocolo tls1.0 como BEAST (Browser Exploit Against SSL/TLS), aunque la suite tiene cifrados de trasporte como AES**
 
+RC4 (ataques estadísticos para descifrar tráfico, CVE-2013-2566).
 
+CBC (Cipher Block Chaining) → Vulnerable a BEAST (Browser Exploit Against SSL/TLS, CVE-2011-3389).
 
+SHA-1 y MD5 (hash vulnerables a colisiones).
 
-TLS1.1 = no recomendados, decretado obsoleto el 13/01/2021. Deshabilitado de los Windows en 2023
+**TLS1.1 = no recomendados, decretado obsoleto el 13/01/2021. Deshabilitado de los Windows en 2023**
 
 **TLS1.2 = si es recomendado, con cifrados: AES > 128 GCM y o CHACHA20+POLY1305 256**
 
