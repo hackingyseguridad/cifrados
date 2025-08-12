@@ -28,7 +28,7 @@ TLS1.1 = no recomendados, decretado obsoleto el 13/01/2021. Deshabilitado de los
 
 Los cifrados y combinaciones recomendadas para los protocolos SSLv2, SSv3, TLS 1.0, TLS 1.1, TLS 1.2 y TLS 1.3, serían los mismos en caso de implementar o configurar cifrado en protocolos como por ejemplo:  SNMPv3, Telnet, sFTP, NFS, smtp, pop3, IMAP4, HTTPs WWW, ...
 
-SSLV2, SSLV3, TLS 1.0, TLS 1.1, TLS 1.2; algoritmos criptográficos y Hash; Longitudes de clave (bits) Uso Seguridad baja, rotos, vulnerables: **no utilizar:**
+SSLV2, SSLV3, TLS 1.0, TLS 1.1, TLS 1.2; algoritmos criptográficos y Hash; Longitudes de clave (bits) Seguridad baja, rotos, vulnerables: **no utilizar:**
 				
 DES	40, 56
 
@@ -124,7 +124,8 @@ Algoritmo cuántico Grover (1996), reduce el tiempo para encontrar ciertos eleme
 Algoritmo cuántico Shor (1994), permite descomponer en factores primos un numero compuesto en tiem-po polinómico; Supone una amenaza para cifrados asimétricos que usan claves públicas (cifrado) y claves privadas(descifrado) una infraestructura PKI: intercambios de clave RSA y curvas elípticas:
  
 Intercambio de claves públicas (cifrar) y clave privadas (descifrar) con Infraestructura de clave Publica ó PKI: 
-NUEVAS COMBINACIOJNES DE CIFRADOS POST CUANTICO:
+
+### NUEVAS COMBINACIOJNES DE CIFRADOS POST CUANTICO:
 NIST lanza el 13 de agosto de 2024, los primeros estándares de cifrados, post cuánticos, que han sido nor-malizados:
 Se estima que en pocos años tendremos ya ordenadores cuánticos, accesibles para los todos los usuarios.
 Se crea la necesidad de crear nuevos algoritmos post cuánticos que resistan los ataques con tecnología cuánti-ca, combinados sobre los actuales cifrados utilizados.
@@ -168,8 +169,7 @@ https://csrc.nist.gov/Projects/Post-Quantum-Cryptography
 https://pq-crystals.org/ 
 https://es.wikipedia.org/wiki/Criptograf%C3%ADa_postcu%C3%A1ntica 
 
-
-2.6	CONJUNTO DE COMBINACIONES (CIPHER SUITE) RECOMENDADAS TLS
+## CONJUNTO DE COMBINACIONES (CIPHER SUITE) RECOMENDADAS TLS
 Ejemplos de combinaciones TLS, recomendadas:  La combinación de: Intercambio de clave + firma + cifra-dos y tamaño de HASH > 128 + curva elíptica, hacen que un conjunto de cifrados (cipher suite) sea conside-rado segura!, lo que por sí solos o conjunto de dos, no lo son; (Se incluyen por ejemplo, los cifrados no re-comendaos “por si solos” ARIA y CAMELIA que si van acompañados de _GCM_ o _POLY1305 sí serian seguros! ):
 
 seguridad_alta.txt
@@ -197,7 +197,7 @@ Uso de grupos DH débiles: La elección de grupos DH demasiado pequeños o con p
 Falta de validación de parámetros: Si no se valida correctamente la entrada del usuario, los atacantes pueden proporcionar parámetros maliciosos que permitan ataques.
 Implementaciones inseguras de ECDH: El Elliptic Curve Diffie-Hellman (ECDH) es una variante de DH basada en curvas elípticas. Vulnerabilidades en su implementación pueden permitir ataques similares a los de DH.
 
-2.7	CONJUNTO DE CIFRADOS (CIPHER SUITE) NO RECOMENDADOS TLS
+## CONJUNTO DE CIFRADOS (CIPHER SUITE) NO RECOMENDADOS TLS
 
 seguridad_media.txt
 
