@@ -10,7 +10,7 @@ Procolos SSL/TLS; SSL (Secure Sockets Layer) Capa de Conexiones Seguras. Es un p
 
 ### PROTOCOLOS RECOMENDADOS:
 
-**SSLv2 = no recomendado, los cifrados están todos rotos/vulnerados.**
+### **SSLv2 = no recomendado, los cifrados están todos rotos/vulnerados.**
 
 Cifrado débil: Usaba algoritmos obsoletos como MD5 y soportaba suites de cifrado inseguras.
 
@@ -20,13 +20,13 @@ Falta de protección por truncamiento: Permitía ataques de truncamiento de mens
 
 Sin soporte para SNI (Server Name Indication): Limitaba la configuración de hosts virtuales seguros.
 
-**SSLv3 = no recomendado, los cifrados están todos rotos/vulnerados. ¡Vulnerable a POODLE!**
+### **SSLv3 = no recomendado, los cifrados están todos rotos/vulnerados. ¡Vulnerable a POODLE!**
 
 POODLE (CVE-2014-3566): Permitía descifrar contenido mediante un ataque de padding oracle.
 
 Cifrados obsoletos: Aún permitía RC4 y otros algoritmos inseguros.
 
-**TLS1.0 = no recomendados, porque tienen vulnerabilidades propias el protocolo tls1.0 como BEAST (Browser Exploit Against SSL/TLS), aunque la suite tiene cifrados de trasporte como AES**
+### **TLS1.0 = no recomendados, porque tienen vulnerabilidades propias el protocolo tls1.0 como BEAST (Browser Exploit Against SSL/TLS), aunque la suite tiene cifrados de trasporte como AES**
 
 RC4 (ataques estadísticos para descifrar tráfico, CVE-2013-2566).
 
@@ -34,13 +34,23 @@ CBC (Cipher Block Chaining) → Vulnerable a BEAST (Browser Exploit Against SSL/
 
 SHA-1 y MD5 (hash vulnerables a colisiones).
 
-**TLS1.1 = no recomendados, decretado obsoleto el 13/01/2021. Deshabilitado de los Windows en 2023**
+### **TLS1.1 = no recomendados, decretado obsoleto el 13/01/2021. Deshabilitado de los Windows en 2023**
 
-**TLS1.2 = si es recomendado, con cifrados: AES > 128 GCM y o CHACHA20+POLY1305 256**
+POODLE (CVE-2014-8736): Aunque afecta principalmente a SSL 3.0, algunos entornos permiten downgrade a TLS 1.1.
 
-**TLS1.3 = si es recomendado, con la suite de cifrados actuales que ofrece.**
+Lucky13 (CVE-2013-0169): Ataque de temporización contra CBC-mode ciphers, permitiendo descifrar datos.
 
-### CIFRADOS NO RECOMENDADOS, EN SUITE TLS U OTROS PROTOCOLOS:
+CBC (Cipher Block Chaining), vulnerable a BEAST (aunque mitigado en TLS 1.1, sigue siendo débil).
+
+SHA-1 (considerado inseguro desde 2017).
+
+RC4 (prohibido por RFC 7465).
+
+### **TLS1.2 = si es recomendado, con cifrados: AES > 128 GCM y o CHACHA20+POLY1305 256**
+
+### **TLS1.3 = si es recomendado, con la suite de cifrados actuales que ofrece.**
+
+## CIFRADOS NO RECOMENDADOS, EN SUITE TLS U OTROS PROTOCOLOS:
 
 Los cifrados y combinaciones recomendadas para los protocolos SSLv2, SSv3, TLS 1.0, TLS 1.1, TLS 1.2 y TLS 1.3, serían los mismos en caso de implementar o configurar cifrado en protocolos como por ejemplo:  SNMPv3, Telnet, sFTP, NFS, smtp, pop3, IMAP4, HTTPs WWW, ...
 
