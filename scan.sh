@@ -7,7 +7,24 @@
 #
 echo "..."
 echo
-nmap -v0 $1 $2 -F --script=ssl-enum-ciphers -PE -sTV --open -n --randomize-hosts --max-retries 2 --min-rate 999 -oN resultado.txt
+
+cat << "INFO"
+
+░░░░░░███████ ]▄▄▄▄▄▄▄▄▃   . . .   http://www.hackingyseguridad.com/
+▂▄▅█████████▅▄▃▂
+I███████████████████].
+◥⊙▲⊙▲⊙▲⊙▲⊙▲⊙▲⊙◤
+
+INFO
+if [ -z "$1" ]; then
+        echo
+        echo "Escanea y estrae los cifrados ofrecidos /permitidos"
+        echo "Requiere nmap"
+        echo "Uso.: sh scan.sh <ip/rango>"
+        echo
+        exit 0
+fi
+nmap -v0 $1 $2 --script=ssl-enum-ciphers -PE -sTV --open --randomize-hosts --max-retries 2 --min-rate 999 -oN resultado.txt
 echo "cifrados debiles"
 echo "SSLv2  EXPORT LOW  DES  RC4  MD5 NULL"
 echo "====================================="
@@ -42,4 +59,6 @@ if [ $vulnerable_found -eq 1 ]; then
 fi
 
 exit 0
+
+
 
