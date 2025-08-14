@@ -13,7 +13,7 @@ while read line; do
       ;;
     *)
       case "$line" in
-          *SSLv2*|*SSLv3|*TLSv1.0*|*EXPORT*|*LOW*|*DES*|*RC4*|*_MD5*|*SWEET32*|*3DES*|*_DH*|*_DHE_*|*TLS_DHE_NULL_*)
+          *SSLv2*|*SSLv3|*TLSv1.0*|*TLSv1.1*|*TLSv1.2*|*EXPORT*|*LOW*|*DES*|*RC4*|*_MD5*|*SWEET32*|*3DES*|*_DH*|*_DHE_*|*TLS_DHE_NULL_*|*_anon_*|*_RC2_*)
           if [ $vulnerable_found -eq 0 ]; then
             echo "$current_ip"
             vulnerable_found=1
