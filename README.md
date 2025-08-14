@@ -1,12 +1,12 @@
 ### Cifrados !!!
 
-### * Escaneo subrutinas
+### 1.- Escaneo subrutinas
 
 sh scan.sh IP/rango 
 
 sh scan_cifrados.sh lista de IP en ip.txt
 
-### * Cifrados recomendadodos: 
+### 2.- Cifrados recomendadodos: 
 
 https://github.com/hackingyseguridad/cifrados/blob/main/ciffrados.md
 
