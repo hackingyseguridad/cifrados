@@ -233,6 +233,8 @@ Implementaciones inseguras de ECDH: El Elliptic Curve Diffie-Hellman (ECDH) es u
 
 [seguridad_baja.txt](https://github.com/hackingyseguridad/cifrados/blob/main/seguridad_baja.txt)
 
+[seguridad_militar.txt](https://github.com/hackingyseguridad/cifrados/blob/main/seguridad_militar.txt`)
+
 ## IPSEC
 
 IPSec es un “conjunto de protocolos”: Protocolo 51 AH: (Integridad y autentificación).  y/ó Protocolo 50 ESP (En-capsulación): 
