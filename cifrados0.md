@@ -123,4 +123,4 @@ KEX: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256
 
 ---
 
-**Última actualización**: Diciembre 2023 - Seguir estándares NIST y recomendaciones OWASP
+**Última actualización**: Agosto 2025 - http://www.hackingyseguridad.com
