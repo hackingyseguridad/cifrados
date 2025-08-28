@@ -26,8 +26,8 @@ if [ -z "$1" ]; then
 fi
 nmap -v0  $1 $2 --script=ssl-enum-ciphers -sTV --open -oN resultado.txt
 echo "cifrados debiles"
-echo "SSLv2  EXPORT LOW  DES  RC4  MD5 NULL"
-echo "====================================="
+echo "SSLv2 TLS1.0 DH EXPORT LOW DES 3DES DHE RC4 MD5 SHA CBC NULL"
+echo "============================================================"
 
 current_ip=""
 vulnerable_found=0
