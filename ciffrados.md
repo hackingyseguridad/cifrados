@@ -321,7 +321,8 @@ ecdsa-sha2-nistp256 (NIST P-256, aceptable)
 
 Evitar:
 
-ssh-rsa (sin sufijo SHA-2, vulnerable si se usa SHA-1).
+ssh-rsa (sin sufijo SHA-2, vulnerable si se usa SHA-1). RSA de 1024, débiles / vulnerables, RSA débiles: con generación deficiente de aleatoriedad, y factores comunes entre claves ..con ataques Man-in-the-Middle (MiTM) con downgrade forzando a ssh-rsa 1024, o con acceso local a id_rsa clave cifrada, seria fácil obtener la clave privada a través del hash con john the ripper (con el módulo ssh2john) o hashcat ; algunos clientes SSH permiten el reenvío del agente SSH por defecto (como AbsoluteTelnet y Tectia SSH), lo que puede permitir a servidores intermedios firmar mensajes arbitrarios con la clave privada del usuario.
+
 
 3. Encryption Algorithms (encryption_algorithms)
 Seguros:
