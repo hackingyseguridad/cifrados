@@ -49,6 +49,8 @@ RC4 (prohibido por RFC 7465).
 
 ### **TLS1.3 = si es recomendado, con la suite de cifrados actuales que ofrece.**
 
+### **TLS 1.4 = si es recomendado, con la suite de cifrados actuales que ofrece.** , 
+mejoras propuestas en la nueva versión: reducción de latencia en el handshake, menos round-trips entre cliente y servidor, optimización para conexiones de alta velocidad, protección mejorada contra ataques cuánticos, mejor forward secrecy, soporte para algoritmos post-cuánticos KEM (Key Encapsulation Mechanisms), mecanismos de autenticación, suite de cifrados robustos, ... 
 
 ## CIFRADOS NO RECOMENDADOS, EN SUITE TLS U OTROS PROTOCOLOS:
 
