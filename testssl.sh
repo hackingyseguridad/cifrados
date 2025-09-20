@@ -26,7 +26,7 @@ if [ -z "$1" ]; then
 fi
 nmap -v0  $1 $2 --script=ssl-enum-ciphers -sTV --open -oN resultado.txt
 echo "cifrados debiles"
-echo "SSLv2 TLS1.0 DH EXPORT LOW DES 3DES DHE RC4 MD5 SHA CBC RSA"
+echo "SSLv3 TLS1.0 DH EXPORT LOW DES 3DES DHE RC4 MD5 SHA CBC RSA"
 echo "==========================================================="
 
 current_ip=""
@@ -42,7 +42,7 @@ while read line; do
       ;;
     *)
       case "$line" in
-         *SSLv2*|*SSLv3|*TLSv1.0*|*TLSv1.1*|*TLSv1.2*|*EXPORT*|*LOW*|*DES*|*RC4*|*_MD5*|*SWEET32*|*3DES*|*_DH*|*_DHE_*|*TLS_DHE_NULL_*|*_anon_*|*_RC2_*)
+         *SSLv2*|*SSLv3*|*TLSv1.0*|*TLSv1.1*|*TLSv1.2*|*EXPORT*|*LOW*|*DES*|*RC4*|*_MD5*|*SWEET32*|*3DES*|*_DH*|*_DHE_*|*TLS_DHE_NULL_*|*_anon_*|*_RC2_*)
           if [ $vulnerable_found -eq 0 ]; then
             echo "$current_ip"
             vulnerable_found=1
