@@ -142,7 +142,7 @@ Texto cifra-do	Texto sin forma-to	Produc-ción
 
 Qué usar en lugar de CBC - La forma más segura de evitar este problema es utilizar cifrado autenticado, que garantiza la integridad y la confidencialidad de los datos. Galois/Counter Mode (GCM) es una alternativa popular a CBC que proporciona cifrado autenticado con cifrados de bloque como AES. 
 
-- mitmproxy/mitmproxy: An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers.   https://github.com/mitmproxy/mitmproxy 
+mitmproxy/mitmproxy: An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers.   https://github.com/mitmproxy/mitmproxy 
 
 ## CIFRADOS POST CUANTICOS 
 
