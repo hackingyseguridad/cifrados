@@ -309,6 +309,12 @@ diffie-hellman-group16-sha512 (DH de 8192 bits, seguro)
 
 diffie-hellman-group18-sha512 (DH de 8192 bits, seguro)
 
+**(KexAlgorithms)  postulanticas !!**
+
+OpenSSH versión 9.0, incorporó en la suite: sntrup761x25519-sha512  , SIKE + Curve25519  (- SIKE fue roto en 2022 !)
+
+OpenSSH versión 9.9, añadió mlkem768x25519-sha256  , Kyber768 + Curve25519
+
 Evitar:
 
 diffie-hellman-group14-sha1 (SHA-1 es inseguro)
