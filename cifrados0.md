@@ -1,6 +1,6 @@
 # **Cifrados y Protocolos de Seguridad - Guía Actualizada**
 
-## **⚠️ Importante: Diferenciar entre Encoding y Cifrado**
+## **Importante: Diferenciar entre Encoding y Cifrado**
 
 ### **Sistemas de Encoding (NO son cifrado)**
 - **Base64**: Sistema de codificación para representar datos binarios en texto ASCII. **No proporciona confidencialidad**.
@@ -16,7 +16,7 @@
 - **Longitudes de clave**: 128, 192 o 256 bits
 - **Estado**: Seguro y ampliamente adoptado
 - **Modos de operación recomendados**: GCM, CCM (con autenticación)
-- **🔒 Seguridad**: No es vulnerable a ataques de fuerza bruta con tecnología actual
+- **Seguridad**: No es vulnerable a ataques de fuerza bruta con tecnología actual
 
 ### **ChaCha20**
 - **Tipo**: Cifrado de flujo
@@ -25,11 +25,11 @@
 - **Comúnmente usado con**: Poly1305 para autenticación
 
 ### **3DES (Triple DES)**
-- **Estado**: ⚠️ **OBSOLETO** - Desaprobado por NIST desde 2017
+- **Estado**: **OBSOLETO** - Desaprobado por NIST desde 2017
 - **Razón**: Longitud de clave efectiva de sólo 112 bits, vulnerable a ataques
 
 ### **DES (Data Encryption Standard)**
-- **Estado**: 🚫 **COMPLETAMENTE INSECURE** - Clave de 56 bits, fácilmente vulnerable
+- **Estado**: **COMPLETAMENTE INSECURE** - Clave de 56 bits, fácilmente vulnerable
 
 ---
 
@@ -38,7 +38,7 @@
 ### **RSA**
 - **Uso principal**: Intercambio de claves y firmas digitales
 - **Longitudes recomendadas**: 2048 bits (mínimo), 3072-4096 bits para nueva infraestructura
-- **⚠️ Importante**: No diseñado para cifrar grandes volúmenes de datos directamente
+- **Importante**: No diseñado para cifrar grandes volúmenes de datos directamente
 
 ### **ECDSA (Elliptic Curve Digital Signature Algorithm)**
 - **Ventaja**: Claves más cortas para misma seguridad que RSA
@@ -54,7 +54,7 @@
 
 ### **TLS (Transport Layer Security)**
 - **Versiones seguras**: TLS 1.2 y TLS 1.3
-- **🚫 Obsoletos e inseguros**: SSL 2.0, SSL 3.0, TLS 1.0, TLS 1.1
+- **Obsoletos e inseguros**: SSL 2.0, SSL 3.0, TLS 1.0, TLS 1.1
 - **Cifrados recomendados**: AES-GCM, ChaCha20-Poly1305
 
 ### **SSH (Secure Shell)**
@@ -72,10 +72,10 @@
 - **Estado**: Seguro y recomendado
 
 ### **SHA-1**
-- **Estado**: 🚫 **VULNERABLE** - Colisiones prácticas demostradas
+- **Estado**: **VULNERABLE** - Colisiones prácticas demostradas
 
 ### **MD5**
-- **Estado**: 🚫 **COMPLETAMENTE QUEBRADO** - No usar para seguridad
+- **Estado**:**COMPLETAMENTE QUEBRADO** - No usar para seguridad
 
 ### **HMAC**
 - **Propósito**: Autenticación de mensajes
