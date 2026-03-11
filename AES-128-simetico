@@ -1,3 +1,7 @@
 
-Cifrado  AES-128: Simétrica entre dos puntos
+Cifrado AES-128: Simétrica entre dos puntos (A y B)
+
+en una comunicacion cifrada con AES-128 entre dos puntos (A y B), no se utiliza una "clave privada" , se usa una **clave secreta compartida**
+
+
 
