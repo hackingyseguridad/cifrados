@@ -1,5 +1,8 @@
-
 Cifrado AES-128: Simétrica entre dos puntos (A y B)
+
+para cifrar en AES 128 simetrico solo hace falta una clave secreta que conozcan las 2 partes;
+
+(A) Clave secreta------ clave publica ---------------/ AES 128 /------------------- clave publica ----Clave secreta (B)
 
 En una comunicacion cifrada con AES-128 entre dos puntos (A y B), no se utiliza una "clave privada" , se usa una **clave secreta compartida**
 AES-128 en estos casos no se encarga de este intercambio inicial de la clave; cifra los datos una vez que la clave ya está en posesión de los dos.
