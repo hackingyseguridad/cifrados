@@ -1,7 +1,10 @@
 
 Cifrado AES-128: Simétrica entre dos puntos (A y B)
 
-en una comunicacion cifrada con AES-128 entre dos puntos (A y B), no se utiliza una "clave privada" , se usa una **clave secreta compartida**
+En una comunicacion cifrada con AES-128 entre dos puntos (A y B), no se utiliza una "clave privada" , se usa una **clave secreta compartida**
+AES-128 en estos casos no se encarga de este intercambio inicial de la clave; cifra los datos una vez que la clave ya está en posesión de los dos
+
+
 
 
 
