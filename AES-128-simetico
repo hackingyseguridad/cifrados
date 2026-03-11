@@ -8,10 +8,9 @@ En una comunicacion cifrada con AES-128 entre dos puntos (A y B), no se utiliza 
 AES-128 en estos casos no se encarga de este intercambio inicial de la clave; cifra los datos una vez que la clave ya está en posesión de los dos.
 El punto A envía la clave de sesión cifrada al punto B, y si el punto B la conoce, empieza la comunicacion cifrada AES128.
 
-En estos casos es una **clave secreta compartida**, no seria la clave privada de un algoritmo asimétrico AES, donde al inicio de la comunicación hay un intercambio de clave por RSA o ECC.
+La **clave secreta compartida**, no seria la clave privada de un algoritmo asimétrico AES, donde al inicio de la comunicación hay un intercambio de clave por RSA o ECC.
 
-Esta clave secreta, se guardara en disco duro o en memoria flash de ambos extremos, en cualquiera de estos tres formatos:
-
+Esta clave secreta se guardara en disco duro o en memoria flash de ambos extremos, en formato Hexadecimal;
 AES-128 utiliza claves de 128 bits = 16 bytes × 2 = 32 caracteres hexadecimales
 
 Ejemplos claves secretas AES-128, sin procesar en hexadecimal:
