@@ -14,10 +14,10 @@ Esta clave secreta, se guardara en disco duro o en memoria flash de ambos extrem
 
 AES-128 utiliza claves de 128 bits = 16 bytes × 2 = 32 caracteres hexadecimales
 
-Ej. clave AES-128 en hexadecimal:
+Ej. claves AES-128 en hexadecimal:
 
-9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d
-7f3a8b9c2d4e5f1a6b7c8d9e0f1a2b3c
+miclavesecreta1 = 6d69636c61766573656372657461616531
+miclavesecreta2 = 
 
 Si hacemos un Dump de la memoria Flah, lo buscariamos y veriamos de la siguiente forma:
 
