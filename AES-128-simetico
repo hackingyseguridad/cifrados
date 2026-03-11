@@ -9,9 +9,18 @@ En estos casos es una **clave secreta compartida**, no seria la clave privada de
 
 Esta clave secreta, se guardara en disco duro o en memoria flash de ambos extremos, en cualquiera de estos tres formatos:
 
+AES-128 utiliza claves de 128 bits = 16 bytes × 2 = 32 caracteres hexadecimales
+
 Ej. clave AES-128 en hexadecimal:
 
 9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d
+7f3a8b9c2d4e5f1a6b7c8d9e0f1a2b3c
+
+Si hacemos un Dump de la memoria Flahas lo veriamos de la siguiente forma:
+
+00000000  7f 3a 8b 9c 2d 4e 5f 1a 6b 7c 8d 9e 0f 1a 2b 3c  |.:..-N_.k|....+<|
+
+
 
 
 
