@@ -21,7 +21,9 @@ miclavesecreta2 = 6d69636c6176657365637265746132
 
 Si hacemos un Dump de la memoria Flah, lo buscariamos y veriamos de la siguiente forma:
 
-00000000  7f 3a 8b 9c 2d 4e 5f 1a 6b 7c 8d 9e 0f 1a 2b 3c  |.:..-N_.k|....+<|
+$ hexdump -C flash_dump.bin | grep -A 2 -B 2 "miclave"
+00001000  6d 69 63 6c 61 76 65 73  65 63 72 65 74 61 31 00  |miclave s ecreta1.|
+00001010  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
 
 
 
