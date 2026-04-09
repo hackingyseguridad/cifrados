@@ -1,7 +1,7 @@
 ### 1.- Cifrados recomendados:
 
 
-| Categoría / Protocolo | Seguridad Media (Recomendado) | Seguridad Alta (Recomendado) |
+| Protocolo | Seguridad Media (Recomendado) | Seguridad Alta (Recomendado) |
 | :--- | :--- | :--- |
 | **Protocolos TLS** | TLS 1.2, TLS 1.3, TLS 1.4 (futuro) | TLS 1.3, TLS 1.4 |
 | **Cifrado de transporte (TLS/SSH)** | AES-128-GCM, AES-192-GCM, CHACHA20-POLY1305 | AES-256-GCM, CHACHA20-POLY1305 |
