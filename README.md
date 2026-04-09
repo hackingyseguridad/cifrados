@@ -34,9 +34,14 @@
 
 Vulnerabilidades conocidas asociadas: POODLE, BEAST, CRIME, Lucky13, Sweet32 (3DES), KRACK (WPA2), Dragonblood (WPA3), Logjam, DROWN, Heartbleed, ataques a CBC (bit flipping)
 
+https://github.com/hackingyseguridad/cifrados/blob/main/cifrados0.md
 https://github.com/hackingyseguridad/cifrados/blob/main/ciffrados.md
 
-### 3.- Escaneo subrutinas:
+### 3.- Certificado digital, recomendaciones de seguridad
+
+https://github.com/hackingyseguridad/certificado/
+
+### 4.- Escaneo subrutinas:
 
 testssl.sh IP/rango 
 
