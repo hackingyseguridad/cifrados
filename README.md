@@ -16,6 +16,22 @@
 
 ---
 
+## Tabla 2: Cifrados y Protocolos NO Recomendados (Obsoletos o Vulnerables)
+
+| Tipo / Protocolo | Algoritmos / Cifrados a Evitar (Inseguros) |
+| :--- | :--- |
+| **Protocolos SSL/TLS obsoletos** | SSLv2, SSLv3, TLS 1.0, TLS 1.1 |
+| **Cifrados de bloque débiles** | DES (40/56 bits), 3DES, RC2, RC4, IDEA, CAST, Blowfish, CAMELLIA-128, ARIA (sin modo AEAD) |
+| **Modos de operación inseguros** | AES-CBC, AES-ECB, AES-CFB, AES-CTR (sin integridad) |
+| **Intercambio de clave inseguro** | RSA estático (sin PFS), DH estático, ECDH estático, PSK, grupos DH < 2048 bits |
+| **Funciones hash rotas** | MD5, SHA-1 |
+| **Firma digital débil** | RSA < 2048 bits, DSA, ECDSA con curvas inseguras, ssh-rsa (sin SHA-2) |
+| **IPsec** | IKEv1, grupos DH 2 y 5 (1024 bits) |
+| **SSH** | SSH v1, cifrados: 3des-cbc, arcfour, blowfish-cbc; MACs: hmac-md5, hmac-sha1 |
+| **WiFi** | WEP, WPA-TKIP, WPA2 con TKIP, WPS activado |
+| **PGP/GPG** | RSA < 3072 bits, DSA, Twofish, Serpent, CAMELLIA, IDEA, CAST5 |
+| **Almacenamiento** | MD5, 3DES, SHA-1, AES-128 (en contextos de alta seguridad) |
+
 
 
 https://github.com/hackingyseguridad/cifrados/blob/main/ciffrados.md
