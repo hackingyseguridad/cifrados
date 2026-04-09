@@ -1,5 +1,5 @@
-### 1.- Cifrados recomendados:
 
+### 1.- Cifrados recomendados:
 
 | Protocolo | Seguridad Media (Recomendado) | Seguridad Alta (Recomendado) |
 | :--- | :--- | :--- |
@@ -16,7 +16,7 @@
 
 ---
 
-## Tabla 2: Cifrados y Protocolos NO Recomendados (Obsoletos o Vulnerables)
+### 2.- Cifrados y Protocolos NO Recomendados (Obsoletos o Vulnerables):
 
 | Tipo / Protocolo | Algoritmos / Cifrados a Evitar (Inseguros) |
 | :--- | :--- |
@@ -32,11 +32,11 @@
 | **PGP/GPG** | RSA < 3072 bits, DSA, Twofish, Serpent, CAMELLIA, IDEA, CAST5 |
 | **Almacenamiento** | MD5, 3DES, SHA-1, AES-128 (en contextos de alta seguridad) |
 
-
+Vulnerabilidades conocidas asociadas: POODLE, BEAST, CRIME, Lucky13, Sweet32 (3DES), KRACK (WPA2), Dragonblood (WPA3), Logjam, DROWN, Heartbleed, ataques a CBC (bit flipping)
 
 https://github.com/hackingyseguridad/cifrados/blob/main/ciffrados.md
 
-### 1.- Escaneo subrutinas
+### 3.- Escaneo subrutinas:
 
 testssl.sh IP/rango 
 
@@ -46,4 +46,4 @@ sh scan_cifrados.sh lista de IP en ip.txt
 
 
 
-http://www.hackingyseguridad.com/
+http://www.hackingyseguridad.com/ 
