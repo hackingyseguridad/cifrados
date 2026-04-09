@@ -1,5 +1,5 @@
 
-### 1.- Cifrados recomendados:
+### 1.- Protocolos y cifrados recomendados:
 
 | Protocolo | Seguridad Media (Recomendado) | Seguridad Alta (Recomendado) |
 | :--- | :--- | :--- |
@@ -16,9 +16,9 @@
 
 ---
 
-### 2.- Cifrados y Protocolos NO Recomendados (Obsoletos o Vulnerables):
+### 2.- Cifrados y protocolos no recomendados (Obsoletos rotos o vulnerables):
 
-| Tipo / Protocolo | Algoritmos / Cifrados a Evitar (Inseguros) |
+| Tipo / Protocolo | algoritmos / cifrados a evitar (Inseguros) |
 | :--- | :--- |
 | **Protocolos SSL/TLS obsoletos** | SSLv2, SSLv3, TLS 1.0, TLS 1.1 |
 | **Cifrados de bloque débiles** | DES (40/56 bits), 3DES, RC2, RC4, IDEA, CAST, Blowfish, CAMELLIA-128, ARIA (sin modo AEAD) |
@@ -37,9 +37,13 @@ Vulnerabilidades conocidas asociadas: POODLE, BEAST, CRIME, Lucky13, Sweet32 (3D
 https://github.com/hackingyseguridad/cifrados/blob/main/cifrados0.md
 https://github.com/hackingyseguridad/cifrados/blob/main/ciffrados.md
 
+---
+
 ### 3.- Certificado digital, recomendaciones de seguridad
 
 https://github.com/hackingyseguridad/certificado/
+
+---
 
 ### 4.- Escaneo subrutinas:
 
@@ -47,8 +51,6 @@ testssl.sh IP/rango
 
 sh scan_cifrados.sh lista de IP en ip.txt
 
-
-
-
+---
 
 http://www.hackingyseguridad.com/ 
