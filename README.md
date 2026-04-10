@@ -34,7 +34,6 @@
 
 Vulnerabilidades conocidas asociadas: POODLE, BEAST, CRIME, Lucky13, Sweet32 (3DES), KRACK (WPA2), Dragonblood (WPA3), Logjam, DROWN, Heartbleed, ataques a CBC (bit flipping)
 
-https://github.com/hackingyseguridad/cifrados/blob/main/cifrados0.md
 https://github.com/hackingyseguridad/cifrados/blob/main/ciffrados.md
 
 ---
