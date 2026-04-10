@@ -1,4 +1,3 @@
-
 ## INTRODUCCIÓN
 
 Se analizan los protocolos y cifrados rotos/vulnerados y se elabora un documento que sirva de referencia con los cifrados recomendados con: nivel de seguridad media y nivel de seguridad alta.
@@ -86,11 +85,9 @@ Se analizan los protocolos y cifrados rotos/vulnerados y se elabora un documento
 
 ---
 
-## **Recomendaciones de Implementación**
+## **Recomendaciones de implementación**
 
-```
-
-## SSL/TLS 
+## "SSL/TLS" 
 
 Procolos SSL/TLS; SSL (Secure Sockets Layer) Capa de Conexiones Seguras. Es un protocolo que hace uso de certificados digitales para establecer comunicaciones seguras a través de Internet y utiliza un paquete de cifrados “Cipher Suite”.
 
