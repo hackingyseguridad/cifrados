@@ -88,17 +88,6 @@ Se analizan los protocolos y cifrados rotos/vulnerados y se elabora un documento
 
 ## **Recomendaciones de Implementación**
 
-### **Principios Esenciales**
-1. **Never roll your own crypto**: Usar librerías bien auditadas
-2. **Use nonces/IVs únicos**: Nunca reutilizar vectores de inicialización
-3. **Authenticated encryption**: Preferir cifrados con autenticación integrada (GCM, CCM)
-4. **Proper key management**: Rotación regular de claves, almacenamiento seguro
-
-### **Configuraciones Seguras**
-```bash
-# Ejemplo configuración TLS moderna (Mozilla Intermediate)
-Ciphers: TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
-KEX: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256
 ```
 
 ## SSL/TLS 
