@@ -136,6 +136,8 @@ RC4 (prohibido por RFC 7465).
 ### **TLS 1.4 = si es recomendado, con la suite de cifrados actuales que ofrece.** , 
 mejoras propuestas en la nueva versión: reducción de latencia en el handshake, menos round-trips entre cliente y servidor, optimización para conexiones de alta velocidad, protección mejorada contra ataques cuánticos, mejor forward secrecy, soporte para algoritmos post-cuánticos KEM (Key Encapsulation Mechanisms), mecanismos de autenticación, suite de cifrados robustos, ... 
 
+OpenSSL ultima versión:  https://github.com/openssl/openssl/releases/
+
 ## CIFRADOS NO RECOMENDADOS, EN SUITE TLS U OTROS PROTOCOLOS:
 
 Los cifrados y combinaciones recomendadas para los protocolos SSLv2, SSv3, TLS 1.0, TLS 1.1, TLS 1.2 y TLS 1.3, serían los mismos en caso de implementar o configurar cifrado en protocolos como por ejemplo:  SNMPv3, Telnet, sFTP, NFS, smtp, pop3, IMAP4, HTTPs WWW, ...
