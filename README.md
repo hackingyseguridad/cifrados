@@ -2,7 +2,7 @@
 
 ---
 
-### 1.- Protocolos y cifrados recomendados:
+### 1.- Protocolos y [cifrados recomendados](https://github.com/hackingyseguridad/cifrados/blob/main/LEEME.md):
 
 | Protocolo | Seguridad Media (Recomendado) | Seguridad Alta (Recomendado) |
 | :--- | :--- | :--- |
@@ -37,7 +37,9 @@
 
 Vulnerabilidades conocidas asociadas: POODLE, BEAST, CRIME, Lucky13, Sweet32 (3DES), KRACK (WPA2), Dragonblood (WPA3), Logjam, DROWN, Heartbleed, ataques a CBC (bit flipping)
 
-https://github.com/hackingyseguridad/cifrados/blob/main/ciffrados.md
+[cifrados recomendados](https://github.com/hackingyseguridad/cifrados/blob/main/LEEME.md)
+
+https://github.com/hackingyseguridad/cifrados/blob/main/cifrados.md
 
 ---
 
@@ -55,4 +57,6 @@ sh scan_cifrados.sh lista de IP en ip.txt
 
 ---
 
+#
 http://www.hackingyseguridad.com/ 
+#
