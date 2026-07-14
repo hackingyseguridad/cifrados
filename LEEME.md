@@ -11,9 +11,6 @@
 - [Certificados Digitales](#3--certificados-digitales)
 - [Herramientas de Escaneo](#4--herramientas-de-escaneo)
 - [Guía de Instalación](#guía-de-instalación)
-- [Casos de Uso](#casos-de-uso)
-- [Referencias](#referencias)
-- [Contribuciones](#contribuciones)
 
 ---
 
