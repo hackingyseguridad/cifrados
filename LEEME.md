@@ -1,8 +1,6 @@
 ### Cifrados recomendados 
 
-![Hacking y Seguridad](http://hackingyseguridad.com/banner.png)
-
-> **Repositorio oficial de algoritmos, protocolos y cifrados seguros recomendados para implementaciones criptográficas modernas.**
+> **Repositorio de protocolos y cifrados seguros recomendados para implementaciones criptográficas modernas.**
 
 ### Tabla de Contenidos
 
