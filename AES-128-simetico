@@ -1,40 +1,315 @@
-Cifrado AES-128: Simétrica entre dos puntos (A y B)
+---
+title: "AES-128: Cifrado Simétrico Entre Dos Puntos"
+description: "Guía completa de AES-128 como algoritmo de cifrado simétrico, modos de operación, gestión de claves y búsqueda forense en memoria"
+autor: "hackingyseguridad.com"
+fecha: "2026-07-14"
+tags: ["AES-128", "criptografía simétrica", "cifrado", "claves compartidas"]
+licencia: "GPL-3.0"
+---
 
-para cifrar en AES 128 simetrico solo hace falta una clave secreta que conozcan las partes;
+## 1. Conceptos Fundamentales
 
-(A(datos)) Clave secreta------ clave publica ---------------/ AES 128 /------------------- clave publica ----Clave secreta ((datos)B)
+### 1.1 Definición de AES-128
 
-En una comunicacion cifrada con AES-128 entre dos puntos (A y B), no se utiliza una "clave privada" , se usa una **clave secreta compartida**
-AES-128 en estos casos no se encarga de este intercambio inicial de la clave; cifra los datos una vez que la clave ya está en posesión de los dos.
-El punto A envía la clave de sesión cifrada al punto B, y si el punto B la conoce, empieza la comunicacion cifrada AES128.
+**AES** (Advanced Encryption Standard) es un algoritmo de cifrado simétrico de bloques estandarizado por NIST. **AES-128** especifica:
 
-La **clave secreta**, no seria la clave privada de un algoritmo asimétrico AES, donde al inicio de la comunicación hay un intercambio de clave por RSA, SHA256 o ECC.
+- **Tamaño de bloque:** 128 bits (16 bytes) — fijo para todas las variantes
+- **Tamaño de clave:** 128 bits (16 bytes) — es lo que define la variante "-128"
+- **Tipo:** Cifrado de bloques simétrico (clave compartida)
+- **Seguridad actual:** Considerado seguro para la mayoría de aplicaciones
 
-Esta clave secreta se guardara en disco duro o en memoria flash de ambos extremos, en formato Hexadecimal;
-AES-128 utiliza claves de 128 bits = 16 bytes × 2 = 32 caracteres hexadecimales
+**Nota:** El "-128" en "AES-128" se refiere al tamaño de la clave, no al bloque. Existen AES-192 y AES-256 con claves más grandes.
 
-Ejemplos claves secretas AES-128, sin procesar en hexadecimal:
+---
 
-miclavesecreta1 = 6d69636c6176657365637265746131
-miclavesecreta2 = 6d69636c6176657365637265746132
+### 1.2 Diferencia: Clave Secreta vs Clave Privada
 
-Si hacemos un Dump de la memoria Flah, sin ofuscar, lo buscariamos y veriamos de la siguiente forma:
+Esta es una **confusión conceptual frecuente**:
 
-$ hexdump -C flash_dump.bin | grep -A 2 -B 2 "miclave"
-00001000  6d 69 63 6c 61 76 65 73  65 63 72 65 74 61 31 00  |miclave s ecreta1.|
-00001010  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+| Concepto | AES-128 (Simétrico) | RSA/ECC (Asimétrico) |
+|----------|---------------------|----------------------|
+| **Claves usadas** | 1 clave secreta compartida | Clave privada + clave pública |
+| **Participantes** | A y B conocen la misma clave | A mantiene privada, B accede a pública |
+| **Intercambio inicial** | Manualmente compartida (seguro) | Intercambio de claves públicas |
+| **Cifrado** | Misma clave para cifrar y descifrar | Clave pública cifra, privada descifra |
+| **Autenticación** | No proporciona autenticación | Sí proporciona (firma digital) |
+| **Velocidad** | Muy rápido | Más lento (×1000 en algunas ops) |
 
-Si está ofuscada en la memoria flash, podría aparecer como:
+**En AES-128 NO existe "clave privada"**, solo una **clave secreta compartida** que debe protegerse en ambos extremos.
 
-Datos intercalados: 6D 00 69 00 63 00 6C 00... (formato UTF-16)
+---
 
-XOR simple: 1D 39 33 1C 31 26 35 23... (si aplicaron XOR con algún valor)
+## 2. Flujo de Comunicación Cifrada AES-128
 
-Fragmentada: Repartida en diferentes direcciones de memoria
+### 2.1 Representación del Proceso
 
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                   COMUNICACIÓN AES-128 SIMÉTRICA                 │
+└─────────────────────────────────────────────────────────────────┘
 
+   PUNTO A (EMISOR)                        PUNTO B (RECEPTOR)
+   ┌──────────────────┐                    ┌──────────────────┐
+   │   DATOS CLAROS   │                    │   DATOS CLAROS   │
+   │   "Mensaje"      │                    │   "Mensaje"      │
+   └─────────┬────────┘                    └─────────▲────────┘
+             │                                       │
+             │ Cifrado con                 Descifrado con
+             │ clave secreta               clave secreta
+             ▼                                       ▲
+   ┌──────────────────┐        RED         ┌──────────────────┐
+   │ DATOS CIFRADOS   │ ──────────────────>│ DATOS CIFRADOS   │
+   │ CIPHERTEXT       │      (Insegura)    │ CIPHERTEXT       │
+   └──────────────────┘                    └──────────────────┘
 
+   Requisito crítico: Ambos extremos DEBEN poseer la misma clave secreta
+```
 
+### 2.2 Fases de Establecimiento
+
+| Fase | Descripción | Responsabilidad |
+|------|-------------|-----------------|
+| **1. Generación** | Crear clave aleatoria de 128 bits | Cualquiera (A o B) |
+| **2. Distribución** | Compartir clave de forma segura (NO por red) | Acuerdo previo |
+| **3. Almacenamiento** | Guardar en disco/RAM en formato hexadecimal | Ambos extremos |
+| **4. Cifrado** | A cifra datos con clave + modo (CBC, CTR...) | Punto A |
+| **5. Transmisión** | Enviar datos cifrados por red insegura | Ambos (datos) |
+| **6. Descifrado** | B descifra con misma clave + IV/nonce | Punto B |
+
+**Aspecto crítico:** AES-128 **NO** se encarga de la distribución inicial de la clave. Eso es responsabilidad de los operadores (acuerdo presencial, courier seguro, etc.).
+
+---
+
+## 3. Tamaño de Clave y Formato Hexadecimal
+
+### 3.1 Conversión de Clave
+
+```
+Clave AES-128 = 128 bits = 16 bytes
+
+En hexadecimal:  16 bytes × 2 dígitos hex/byte = 32 caracteres hexadecimales
+En base64:       16 bytes → 24 caracteres base64 + padding
+```
+
+### 3.2 Ejemplos de Claves Válidas
+
+| Clave ASCII | Conversión Hexadecimal | Válida |
+|-------------|------------------------|--------|
+| `miclavesecreta1` | `6d69636c6176657365637265746131` | ✓ (16 bytes) |
+| `miclavesecreta2` | `6d69636c6176657365637265746132` | ✓ (16 bytes) |
+| `a_16_byte_key!!` | `615f31365f627974655f6b65792121` | ✓ (16 bytes) |
+| `short` | `73686f7274` | ✗ (5 bytes, pad requerido) |
+
+### 3.3 Generación Aleatoria (Recomendado)
+
+```bash
+# Generar clave aleatoria de 128 bits en hexadecimal
+openssl rand -hex 16
+# Salida ejemplo: a7f3b9d2c4e1f8a6b2d5c8e9f1a3b4c6
+
+# Generar y guardar en archivo
+openssl rand -hex 16 > clave_secreta.hex
+
+# Verifica el tamaño
+cat clave_secreta.hex | wc -c
+# Debe ser 33 (32 hex + newline)
+```
+
+---
+
+## 4. Modos de Operación
+
+AES es un cifrador de **bloques de 128 bits**. Para mensajes más largos, se requiere un **modo de operación**:
+
+| Modo | Nombre Completo | Ventajas | Desventajas | Uso |
+|------|-----------------|----------|------------|-----|
+| **ECB** | Electronic Code Book | Simple, paralelizable | Patrón detectable (INSEGURO) | ❌ NO USAR |
+| **CBC** | Cipher Block Chaining | Buena seguridad, estándar | Requiere IV, no paralelizable | ✓ Recomendado |
+| **CTR** | Counter Mode | Muy rápido, paralelizable | Requiere nonce único | ✓ Recomendado |
+| **GCM** | Galois/Counter Mode | Autenticación incluida | Más complejo | ✓ Seguridad alta |
+| **OFB** | Output Feedback | Stream de bits | Menos común | ~ A considerar |
+| **CFB** | Cipher Feedback | Stream de bits | Menos común | ~ A considerar |
+
+### 4.1 Ejemplo: CBC Mode
+
+```bash
+# Cifrar archivo con AES-128-CBC
+openssl enc -aes-128-cbc -in archivo.txt -out archivo.enc \
+  -K $(cat clave_secreta.hex) \
+  -S 0000000000000000 \
+  -p
+
+# Descifrar
+openssl enc -d -aes-128-cbc -in archivo.enc -out archivo.txt \
+  -K $(cat clave_secreta.hex) \
+  -S 0000000000000000
+```
+
+**Nota sobre IV (Initialization Vector):**
+- CBC requiere un IV único por cada cifrado
+- El IV no es secreto, pero debe ser aleatorio
+- **Error común:** Usar el mismo IV varias veces compromete la seguridad
+
+---
+
+## 5. Gestión de Claves en Almacenamiento
+
+### 5.1 Almacenamiento en Disco Duro
+
+```bash
+# Guardar clave de forma insegura (NO RECOMENDADO para producción)
+echo "a7f3b9d2c4e1f8a6b2d5c8e9f1a3b4c6" > /etc/myapp/aes.key
+
+# Proteger permisos
+chmod 600 /etc/myapp/aes.key
+chown myapp:myapp /etc/myapp/aes.key
+
+# Búsqueda de clave en el sistema de archivos
+find / -type f -exec grep -l "a7f3b9d2c4e1f8a6b2d5c8e9f1a3b4c6" {} \;
+```
+
+### 5.2 Almacenamiento en Memoria Flash
+
+En dispositivos embebidos (routers, IoT, etc.), la clave suele guardarse en flash:
+
+```bash
+# Extraer dump de memoria flash
+dd if=/dev/mtd0 of=flash_dump.bin
+
+# Buscar patrón hexadecimal de clave (sin ofuscar)
+hexdump -C flash_dump.bin | grep "a7f3 b9d2"
+
+# Salida típica:
+# 00001000  a7 f3 b9 d2 c4 e1 f8 a6  b2 d5 c8 e9 f1 a3 b4 c6  |................|
+# 00001010  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|
+```
+
+---
+
+## 6. Detección y Ofuscación de Claves en Memoria
+
+### 6.1 Técnicas de Ofuscación Empleadas en Malware/Firmware
+
+Cuando los desarrolladores intentan ocultar claves en memoria:
+
+| Técnica | Ejemplo | Detección |
+|---------|---------|-----------|
+| **Datos intercalados (UTF-16)** | `6D 00 69 00 63 00 6C 00` | Buscar patrón nulo cada 2 bytes |
+| **XOR simple** | `1D 39 33 1C 31 26 35 23...` (XOR con 0x9A) | Brute-force XOR con 256 valores |
+| **Fragmentada** | Repartida en múltiples direcciones | Reconstruir secuencias de memoria |
+| **Cifrada internamente** | Almacenada en AES dentro de AES | Instrumentar llamadas criptográficas |
+| **Stack/Heap dinámico** | Generada en tiempo de ejecución | Volcado de memoria en vivo |
+
+### 6.2 Búsqueda Forense de Claves Ofuscadas
+
+```bash
+# Buscar patrón XOR simple (asumiendo XOR con 0x9A)
+# Primero: descifrar el dump de flash con XOR
+python3 << 'EOF'
+import binascii
+
+# Leer dump cifrado
+with open('flash_dump.bin', 'rb') as f:
+    data = f.read()
+
+# Probar XOR con valores comunes (0x00-0xFF)
+for xor_key in range(256):
+    decrypted = bytes([b ^ xor_key for b in data])
+    if b'miclave' in decrypted:
+        print(f"[+] Clave encontrada con XOR {hex(xor_key)}")
+        idx = decrypted.find(b'miclave')
+        print(f"    Offset: 0x{idx:x}")
+        print(f"    Contexto: {decrypted[idx:idx+32]}")
+EOF
+
+# Búsqueda en memoria RAM en vivo (requiere privilegios root)
+cat /proc/sysrq-trigger  # Trigger volcado de kernel (Linux)
+strings /proc/kcore | grep -i "miclave"
+
+# Usar herramientas especializadas
+strings flash_dump.bin | grep -E "^[a-f0-9]{32}$"  # Buscar hex puro
+hexdump -C flash_dump.bin | grep -A1 "micl"
+```
+
+---
+
+## 7. Vulnerabilidades y Consideraciones Operacionales
+
+### 7.1 Riesgos del Modelo Simétrico
+
+| Riesgo | Impacto | Mitigación |
+|--------|---------|-----------|
+| **Compromiso de clave** | Ambos extremos pierden confidencialidad | Cambio de clave periódico |
+| **Distribución inicial** | Requiere canal seguro | Acuerdo presencial/QR code |
+| **No hay autenticación** | No se verifica identidad del emisor | Agregar HMAC o AES-GCM |
+| **Escalabilidad** | N participantes = N(N-1)/2 claves | Usar infraestructura PKI para distribuir |
+| **Reutilización de IV** | Permite ciertos ataques criptográficos | Generar IV aleatorio cada vez |
+
+### 7.2 Mejoras de Seguridad
+
+```bash
+# 1. Usar AES-256 en lugar de AES-128 (mayor margen)
+openssl enc -aes-256-cbc ...
+
+# 2. Combinar con HMAC para autenticación
+echo "dato" | openssl enc -aes-128-cbc -K ... | openssl dgst -sha256 -hmac "clave_hmac"
+
+# 3. Usar derivación de clave (PBKDF2) desde contraseña
+openssl enc -aes-128-cbc -in archivo.txt -out archivo.enc \
+  -S $(openssl rand -hex 8) -P -md sha256
+```
+
+---
+
+## 8. Casos de Uso Prácticos
+
+### 8.1 Comunicación Entre Dos Servidores
+
+```bash
+# Servidor A: Cifra un mensaje
+mensaje="DATOS SENSIBLES"
+clave="a7f3b9d2c4e1f8a6b2d5c8e9f1a3b4c6"
+
+echo "$mensaje" | openssl enc -aes-128-cbc \
+  -K "$clave" \
+  -iv "00000000000000000000000000000000" \
+  -e -base64 > mensaje.enc
+
+# Transmitir mensaje.enc por red (HTTP, TCP, etc.)
+
+# Servidor B: Descifra el mensaje
+cat mensaje.enc | openssl enc -aes-128-cbc \
+  -K "$clave" \
+  -iv "00000000000000000000000000000000" \
+  -d -base64
+```
+
+### 8.2 Protección de Datos en Almacenamiento (Full-Disk Encryption)
+
+```bash
+# Linux: LUKS (usa AES por defecto)
+cryptsetup luksFormat /dev/sda1 --cipher aes-xts-plain64 --key-size 256
+
+# Montar
+cryptsetup luksOpen /dev/sda1 crypt_volume
+mount /dev/mapper/crypt_volume /mnt
+
+# Desmontar
+umount /mnt
+cryptsetup luksClose crypt_volume
+```
+
+---
+
+## 9. Referencias Normativas
+
+- **FIPS 197:** Especificación oficial de AES (NIST)
+- **RFC 3394:** AES Key Wrap Algorithm
+- **RFC 5116:** CRYPTOGRAPHIC ALGORITHM INTERFACE AND ALGORITHM IDENTIFIER REGISTRY
+- **Código Penal Español Art. 197-198:** Acceso no autorizado a datos
+- **RGPD Art. 32:** Seguridad del tratamiento de datos personales (cifrado recomendado)
+
+---
 
 
 
