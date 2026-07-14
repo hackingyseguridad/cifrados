@@ -52,11 +52,11 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 | **TLS 1.1** | ❌ Deprecado | 2006 | 🚫 NO USAR | No soporta AEAD, POODLE |
 | **TLS 1.2** | ✅ Soportado | 2008 | 🟠 ACEPTABLE | Con cifrados modernos (GCM) |
 | **TLS 1.3** | ✅ Actual | 2018 | 🟢 RECOMENDADO | Estado del arte, eliminó debilidades |
-| **TLS 1.4** | ⏳ Propuesto | ~2026 | 🟢 FUTURO | En desarrollo, post-cuántico |
+| **TLS 1.4** | ⏳ Propuesto | ~2027 | 🟢 FUTURO | En desarrollo, post-cuántico |
 
-### 🔐 Cifrados Simétricos Recomendados
+### Cifrados simétricos recomendados
 
-| Cifrado | Tamaño Clave | Modo | Seguridad | Comentario |
+| Cifrado | Tamaño clave | Modo | Seguridad | Comentario |
 |---------|-------------|------|----------|-----------|
 | **AES-128** | 128 bits | GCM | 🟠 Media | Aceptable, estándar NIST |
 | **AES-192** | 192 bits | GCM | 🟢 Alta | Buen balance seguridad/rendimiento |
@@ -82,7 +82,7 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 
 **PFS = Perfect Forward Secrecy** (si se compromete la clave privada, sesiones pasadas permanecen seguras)
 
-### 🏷️ Funciones Hash (Digest)
+###  Funciones Hash (Digest)
 
 | Hash | Tamaño | Colisiones | Seguridad | Uso |
 |------|--------|-----------|----------|-----|
@@ -94,7 +94,7 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 | **SHA-3** | 256/512 | ✅ Seguro | 🟢 Futuro | Estándar moderno |
 | **BLAKE2** | Variable | ✅ Seguro | 🟢 Rápido | Más rápido que MD5 |
 
-### 📝 Firma Digital (Digital Signatures)
+### Firma Digital (Digital Signatures)
 
 | Algoritmo | Tamaño Clave | Seguridad | Velocidad | Recomendación |
 |-----------|-------------|----------|-----------|----------------|
@@ -108,7 +108,7 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 
 **Ed25519 es la mejor opción moderna**: segura, rápida y sin vulnerabilidades conocidas.
 
-### 🔌 Protocolos Específicos
+### Protocolo SSH
 
 #### SSH v2 (Recomendado)
 
@@ -160,7 +160,7 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 | **Hash** | SHA-256 | SHA-512 |
 | **Tamaño RSA (si se usa)** | 3072 bits | 4096 bits |
 
-### 🔮 Post-Cuántico (Quantum-Safe)
+### Post-Cuántico (Quantum-Safe)
 
 | Algoritmo | Tipo | Tamaño Clave | Estado | Recomendación |
 |-----------|------|-------------|--------|----------------|
@@ -174,9 +174,9 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 
 ---
 
-## 2️⃣ Cifrados y Protocolos NO Recomendados
+### Cifrados y protocolos no recomendados
 
-### 🔴 Matriz de Cifrados INSEGUROS
+### Matriz de cifrados INSEGUROS
 
 | Categoría | Algoritmos | Vulnerabilidades | Riesgo |
 |-----------|-----------|-----------------|--------|
@@ -186,7 +186,7 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 | **Funciones Hash** | MD5, SHA-1 | Colisiones prácticas | 🔴 CRÍTICO |
 | **Intercambio Claves** | Diffie-Hellman < 2048 | Logjam, pre-computation | 🔴 CRÍTICO |
 
-### 📋 Vulnerabilidades por Protocolo/Algoritmo
+### Vulnerabilidades por protocolo/algoritmo
 
 | Vulnerabilidad | Afecta a | Año | CVSS | Mitigación |
 |----------------|----------|------|------|-----------|
@@ -201,7 +201,7 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 | **Lucky13** | CBC mode en TLS | 2013 | 5.1 | Usar AEAD (GCM) |
 | **CRIME** | Compresión TLS | 2012 | 7.5 | Deshabilitar compresión |
 
-### Protocolos Específicos a EVITAR
+### Protocolos específicos a evitar
 
 ```yaml
 SSH v1:
@@ -228,11 +228,11 @@ WEP/WPA:
 
 ---
 
-## 3️⃣ Certificados Digitales
+### Certificados digitales
 
-> Para una guía completa sobre certificados, consulta: **[Certificados Digitales](https://github.com/hackingyseguridad/certificado/)**
+**[Certificados Digitales](https://github.com/hackingyseguridad/certificado/)**
 
-### Recomendaciones Rápidas
+### Recomendaciones 
 
 | Aspecto | Recomendación | Por qué |
 |--------|----------------|--------|
@@ -276,13 +276,13 @@ Este repositorio incluye herramientas automáticas para auditar la seguridad cri
 ```
 
 **Funcionalidades**:
-- ✅ Detecta versión TLS/SSL
-- ✅ Enumera cifrados soportados
-- ✅ Identifica vulnerabilidades conocidas
-- ✅ Genera reportes en JSON/HTML
-- ✅ Verifica certificados
-- ✅ Pruebas de OCSP, CRL
-- ✅ Análisis de seguridad PFS
+- Detecta versión TLS/SSL
+- Enumera cifrados soportados
+- Identifica vulnerabilidades conocidas
+- Genera reportes en JSON/HTML
+- Verifica certificados
+- Pruebas de OCSP, CRL
+- Análisis de seguridad PFS
 
 **Requisitos**: bash, openssl, curl
 
@@ -318,7 +318,7 @@ ejemplo.com:443
 
 ---
 
-## Guía de Instalación
+### Guía de Instalación
 
 ### Requisitos Previos
 
@@ -365,7 +365,7 @@ cat seguridad_baja.txt
 
 ## Casos de Uso
 
-### 🌐 Asegurar Servidor Web (Apache/Nginx)
+### securizar servidor Web (Apache/Nginx)
 
 ```bash
 # 1. Auditar servidor actual
@@ -383,7 +383,7 @@ ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;
 ssl_prefer_server_ciphers on;
 ```
 
-### 🔑 Configurar SSH Seguro
+### Configurar SSH Seguro
 
 ```bash
 # Editar /etc/ssh/sshd_config
@@ -400,7 +400,7 @@ sudo systemctl restart sshd
 ssh-audit tu-servidor.com
 ```
 
-### 🛡️ Auditoría de Seguridad Empresarial
+### auditoría de seguridad 
 
 ```bash
 # Crear lista de servidores
@@ -418,7 +418,7 @@ done
 grep -r "FAILED" *.json > fallos.txt
 ```
 
-### 🔐 Migración a Post-Cuántico
+### migración a post-cuántico
 
 ```bash
 # 1. Auditar algoritmos actuales
@@ -435,7 +435,7 @@ grep -r "FAILED" *.json > fallos.txt
 
 ---
 
-## 📊 Resumen Rápido - ¿Qué usar?
+### Resumen
 
 ### Por Tipo de Servicio
 
@@ -477,7 +477,7 @@ grep -r "FAILED" *.json > fallos.txt
 
 ---
 
-## 📚 Estructura del Repositorio
+### Estructura del repositorio
 
 ```
 cifrados/
@@ -527,42 +527,10 @@ cifrados/
 
 ---
 
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. **Fork** el repositorio
-2. **Crea una rama** para tu feature (`git checkout -b feature/MiMejora`)
-3. **Commit** tus cambios (`git commit -am 'Añade nueva información'`)
-4. **Push** a la rama (`git push origin feature/MiMejora`)
-5. **Abre un Pull Request**
-
-### Áreas donde Contribuir
-
-- ✨ Nuevos cifrados/protocolos (post-cuántico, etc.)
-- ✨ Traducciones a otros idiomas
-- ✨ Ejemplos de configuración
-- ✨ Herramientas de auditoría
-- ✨ Correcciones y actualizaciones
-- ✨ Documentación mejorada
 
 ---
 
-## ⚖️ Licencia
-
-Este proyecto está bajo licencia **MIT**. Consulta [LICENSE](LICENSE) para más detalles.
-
----
-
-## 📞 Contacto y Soporte
-
-- 🌐 **Sitio Web**: [www.hackingyseguridad.com](http://www.hackingyseguridad.com/)
-- 📧 **GitHub**: [hackingyseguridad](https://github.com/hackingyseguridad)
-- 🐛 **Issues**: [Reportar problema](https://github.com/hackingyseguridad/cifrados/issues)
-
----
-
-## ⚠️ Disclaimer
+### Disclaimer
 
 Este repositorio proporciona información sobre seguridad criptográfica. El uso de esta información es bajo tu responsabilidad. No nos hacemos responsables de:
 
@@ -571,20 +539,8 @@ Este repositorio proporciona información sobre seguridad criptográfica. El uso
 - Uso malintencionado de esta información
 - Cambios en estándares de seguridad después de la publicación
 
-**Siempre consulta con profesionales de seguridad antes de implementar en producción.**
-
 ---
 
-## 📈 Estado del Proyecto
-
-| Aspecto | Estado |
-|--------|--------|
-| Última Actualización | Julio 2026 |
-| Versión | 2.0 |
-| Mantenimiento | 🟢 Activo |
-| Estabilidad | 🟢 Estable |
-| Cobertura Post-Cuántico | 🟠 En Desarrollo |
-
----
-
-**Hecho con ❤️ por la comunidad de Hacking y Seguridad**
+#
+http://www.hackingyseguridad.com/
+#
