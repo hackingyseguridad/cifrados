@@ -1,10 +1,10 @@
-# 🔐 Cifrados Recomendados - Guía de Seguridad Criptográfica
+### Cifrados recomendados 
 
 ![Hacking y Seguridad](http://hackingyseguridad.com/banner.png)
 
 > **Repositorio oficial de algoritmos, protocolos y cifrados seguros recomendados para implementaciones criptográficas modernas.**
 
-## 📋 Tabla de Contenidos
+### Tabla de Contenidos
 
 - [Introducción](#introducción)
 - [Niveles de Seguridad](#niveles-de-seguridad)
@@ -19,7 +19,7 @@
 
 ---
 
-## Introducción
+### Introducción
 
 Este repositorio contiene una guía completa sobre **criptografía moderna**, cifrados seguros y protocolos de seguridad recomendados para:
 
@@ -28,13 +28,13 @@ Este repositorio contiene una guía completa sobre **criptografía moderna**, ci
 ✅ **Pentesters** que realizan auditorías de seguridad  
 ✅ **Security Teams** que definen políticas de cifrado empresariales  
 
-### 🎯 Objetivo Principal
+### Objetivo
 
 Proporcionar recomendaciones actualizadas sobre qué cifrados usar, cuáles evitar y por qué, considerando tanto la seguridad a corto plazo como la resistencia post-cuántica.
 
 ---
 
-## Niveles de Seguridad
+### Niveles de seguridad
 
 Este repositorio clasifica las recomendaciones en **4 niveles de seguridad**:
 
@@ -47,9 +47,9 @@ Este repositorio clasifica las recomendaciones en **4 niveles de seguridad**:
 
 ---
 
-## 1️⃣ Cifrados y Protocolos Recomendados
+### Protocolos recomendados
 
-### 📊 Tabla Comparativa - Protocolos TLS/SSL
+### Tabla Comparativa - Protocolos TLS/SSL
 
 | Protocolo | Estado | Año | Recomendación | Notas |
 |-----------|--------|------|----------------|--------|
