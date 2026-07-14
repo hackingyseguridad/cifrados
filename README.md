@@ -37,7 +37,7 @@
 
 Vulnerabilidades conocidas asociadas: POODLE, BEAST, CRIME, Lucky13, Sweet32 (3DES), KRACK (WPA2), Dragonblood (WPA3), Logjam, DROWN, Heartbleed, ataques a CBC (bit flipping)
 
-[cifrados recomendados](https://github.com/hackingyseguridad/cifrados/blob/main/LEEME.md)
+[**+ cifrados recomendados**](https://github.com/hackingyseguridad/cifrados/blob/main/LEEME.md)
 
 https://github.com/hackingyseguridad/cifrados/blob/main/cifrados.md
 
