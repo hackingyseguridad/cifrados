@@ -95,13 +95,13 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 
 | Algoritmo | Tamaño Clave | Seguridad | Velocidad | Recomendación |
 |-----------|-------------|----------|-----------|----------------|
-| **RSA-2048** | 2048 bits | 🔴 Débil | 🐢 Lenta | NO USAR |
-| **RSA-3072** | 3072 bits | 🟠 Aceptable | 🐢 Lenta | Aceptable (legacy) |
-| **RSA-4096** | 4096 bits | 🟢 Alta | 🐢 Lenta | Recomendado RSA |
-| **ECDSA-P256** | 256 bits | 🟠 Media | 🐇 Rápida | Aceptable |
-| **ECDSA-P384** | 384 bits | 🟢 Alta | 🐇 Rápida | Recomendado ECDSA |
-| **EdDSA (Ed25519)** | 256 bits | 🟢 Muy Alta | 🚀 Muy Rápida | ✅ MEJOR OPCIÓN |
-| **EdDSA (Ed448)** | 456 bits | 🟢 Extrema | 🚀 Muy Rápida | Máxima seguridad |
+| **RSA-2048** | 2048 bits | 🔴 Débil | Lenta | NO USAR |
+| **RSA-3072** | 3072 bits | 🟠 Aceptable | Lenta | Aceptable (legacy) |
+| **RSA-4096** | 4096 bits | 🟢 Alta | Lenta | Recomendado RSA |
+| **ECDSA-P256** | 256 bits | 🟠 Media | Rápida | Aceptable |
+| **ECDSA-P384** | 384 bits | 🟢 Alta | Rápida | Recomendado ECDSA |
+| **EdDSA (Ed25519)** | 256 bits | 🟢 Muy Alta | Muy Rápida | ✅ MEJOR OPCIÓN |
+| **EdDSA (Ed448)** | 456 bits | 🟢 Extrema | Muy Rápida | Máxima seguridad |
 
 **Ed25519 es la mejor opción moderna**: segura, rápida y sin vulnerabilidades conocidas.
 
@@ -256,7 +256,7 @@ openssl s_client -connect example.com:443 -showcerts
 
 ---
 
-## 4️⃣ Herramientas de Escaneo
+### Herramientas de Escaneo
 
 Este repositorio incluye herramientas automáticas para auditar la seguridad criptográfica:
 
@@ -283,7 +283,7 @@ Este repositorio incluye herramientas automáticas para auditar la seguridad cri
 
 **Requisitos**: bash, openssl, curl
 
-### 📡 scan_cifrados.sh
+### scan_cifrados.sh
 
 **Descripción**: Escanea múltiples direcciones IP y clasifica por nivel de seguridad
 
@@ -360,7 +360,7 @@ cat seguridad_baja.txt
 
 ---
 
-## Casos de Uso
+### Casos de Uso
 
 ### securizar servidor Web (Apache/Nginx)
 
@@ -492,38 +492,35 @@ cifrados/
 
 ---
 
-## 🔗 Referencias y Recursos
+### Referencias:
 
 ### Estándares Oficiales
 
-- 📘 [NIST Special Publication 800-175B](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-175B.pdf) - Guía de Criptografía
-- 📘 [RFC 8446 - TLS 1.3](https://tools.ietf.org/html/rfc8446)
-- 📘 [RFC 8308 - SSH Algoritmos](https://tools.ietf.org/html/rfc8308)
-- 📘 [RFC 7539 - ChaCha20-Poly1305](https://tools.ietf.org/html/rfc7539)
+- [NIST Special Publication 800-175B](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-175B.pdf) - Guía de Criptografía
+- [RFC 8446 - TLS 1.3](https://tools.ietf.org/html/rfc8446)
+- [RFC 8308 - SSH Algoritmos](https://tools.ietf.org/html/rfc8308)
+- [RFC 7539 - ChaCha20-Poly1305](https://tools.ietf.org/html/rfc7539)
 
 ### Documentación de Seguridad
 
-- 🛡️ [OWASP - Cryptographic Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures/)
-- 🛡️ [Mozilla SSL Configuration Generator](https://ssl-config.mozilla.org/)
-- 🛡️ [SANS Top 25 Weaknesses](https://www.sans.org/top25/)
-- 🛡️ [NIST PQC Project](https://csrc.nist.gov/projects/post-quantum-cryptography)
+- [OWASP - Cryptographic Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures/)
+- [Mozilla SSL Configuration Generator](https://ssl-config.mozilla.org/)
+- [SANS Top 25 Weaknesses](https://www.sans.org/top25/)
+- [NIST PQC Project](https://csrc.nist.gov/projects/post-quantum-cryptography)
 
 ### Herramientas Relacionadas
 
-- 🔧 [testssl.sh](https://github.com/drwetter/testssl.sh) - Auditoría TLS
-- 🔧 [ssh-audit](https://github.com/jtesta/ssh-audit) - Auditoría SSH
-- 🔧 [OpenSSL](https://www.openssl.org/) - Herramienta estándar
-- 🔧 [Wireshark](https://www.wireshark.org/) - Análisis de tráfico
+- [testssl.sh](https://github.com/drwetter/testssl.sh) - Auditoría TLS
+- [ssh-audit](https://github.com/jtesta/ssh-audit) - Auditoría SSH
+- [OpenSSL](https://www.openssl.org/) - Herramienta estándar
+- [Wireshark](https://www.wireshark.org/) - Análisis de tráfico
 
 ### Artículos Técnicos
 
-- 📄 Criptografía Post-Cuántica
-- 📄 Vulnerabilidades TLS Históricas
-- 📄 Migración de Algoritmos Legacy
-- 📄 Gestión de Certificados
-
----
-
+- Criptografía Post-Cuántica
+- Vulnerabilidades TLS Históricas
+- Migración de Algoritmos Legacy
+- Gestión de Certificados
 
 ---
 
@@ -537,6 +534,7 @@ Este repositorio proporciona información sobre seguridad criptográfica. El uso
 - Cambios en estándares de seguridad después de la publicación
 
 ---
+
 
 #
 http://www.hackingyseguridad.com/
