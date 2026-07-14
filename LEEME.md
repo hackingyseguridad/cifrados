@@ -29,14 +29,14 @@ Proporcionar recomendaciones actualizadas sobre qué cifrados usar, cuáles evit
 
 ### Niveles de seguridad
 
-Este repositorio clasifica las recomendaciones en **4 niveles de seguridad**:
+Se clasifica las recomendaciones en **4 niveles de seguridad**:
 
 | Nivel | Descripción | Casos de Uso | Archivos |
 |-------|-------------|-------------|----------|
-| 🔴 **Seguridad Baja** | Cifrados legacy, no recomendados para datos sensibles | Sistemas heredados, compatibilidad | `seguridad_baja.txt` |
-| 🟠 **Seguridad Media** | Aceptables para la mayoría de aplicaciones comerciales | E-commerce, aplicaciones web, HTTPS | `seguridad_media.txt` |
-| 🟢 **Seguridad Alta** | Recomendado para datos muy sensibles y financieros | Banca, datos personales, HIPAA | `seguridad_alta.txt` |
-| 🔵 **Seguridad Militar** | Nivel máximo, usado en contextos de defensa | Secretos de estado, datos clasificados | `seguridad_militar.txt` |
+| Seguridad Baja | Cifrados legacy, no recomendados para datos sensibles | Sistemas heredados, compatibilidad | `seguridad_baja.txt` |
+| Seguridad Media | Aceptables para la mayoría de aplicaciones comerciales | E-commerce, aplicaciones web, HTTPS | `seguridad_media.txt` |
+| Seguridad Alta | Recomendado para datos muy sensibles y financieros | Banca, datos personales, HIPAA | `seguridad_alta.txt` |
+| Seguridad Militar | Nivel máximo, usado en contextos de defensa | Secretos de estado, datos clasificados | `seguridad_militar.txt` |
 
 ---
 
