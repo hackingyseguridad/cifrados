@@ -21,12 +21,7 @@
 
 ### Introducción
 
-Este repositorio contiene una guía completa sobre **criptografía moderna**, cifrados seguros y protocolos de seguridad recomendados para:
-
-✅ **Desarrolladores** que necesitan implementar seguridad en sus aplicaciones  
-✅ **DevOps/SysAdmins** que administran servidores y comunicaciones  
-✅ **Pentesters** que realizan auditorías de seguridad  
-✅ **Security Teams** que definen políticas de cifrado empresariales  
+Este repositorio contiene una guía completa sobre **criptografía moderna**, cifrados seguros y protocolos de seguridad recomendados
 
 ### Objetivo
 
