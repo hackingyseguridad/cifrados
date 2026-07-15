@@ -111,7 +111,7 @@ Convierte datos de cualquier tamaño en una cadena de tamaño fijo (resumen/fing
 
 ### Cifrados Débiles y Deprecados
 
-### ❌ NUNCA Usar en Producción
+### NUNCA Usar en Producción
 
 #### 1. DES y 3DES (Triple DES)
 
@@ -316,11 +316,11 @@ EOF
 
 | Función | Salida | Bloque | Estado | Uso |
 |---------|--------|-------|--------|-----|
-| **SHA-256** | 256 bits | 512 bits | ✅ Recomendado | Criptografía, blockchain |
-| **SHA-512** | 512 bits | 1024 bits | ✅ Recomendado | Firmas, derivación de claves |
-| **SHA-3 (Keccak)** | 224, 256, 384, 512 | Variable | ✅ Recomendado (futuro) | Estándar NIST 2015 |
-| **BLAKE2** | 256, 512 bits | Variable | ✅ Recomendado | Rápido, criptográficamente fuerte |
-| **BLAKE3** | 256 bits (extensible) | Variable | ✅ Nuevo (2021) | Muy rápido, parallelizable |
+| **SHA-256** | 256 bits | 512 bits |  Recomendado | Criptografía, blockchain |
+| **SHA-512** | 512 bits | 1024 bits |  Recomendado | Firmas, derivación de claves |
+| **SHA-3 (Keccak)** | 224, 256, 384, 512 | Variable | Recomendado (futuro) | Estándar NIST 2015 |
+| **BLAKE2** | 256, 512 bits | Variable | Recomendado | Rápido, criptográficamente fuerte |
+| **BLAKE3** | 256 bits (extensible) | Variable | Nuevo (2021) | Muy rápido, parallelizable |
 
 **Comparativa de velocidad (en CPU moderno):**
 
@@ -338,11 +338,11 @@ AES:       ~0.8 GB/s (sin AES-NI)
 
 | Algoritmo | Clave Mín | Clave Típ | Estado | Caso de Uso |
 |-----------|-----------|-----------|--------|-----------|
-| **RSA** | 2048 bits | 4096 bits | ✅ Confiable | Cifrado, firma, TLS |
-| **ECDSA** | P-256 | P-384, P-521 | ✅ Recomendado | Firma, ECDH |
-| **EdDSA** | 256 bits | 256 bits | ✅ Recomendado | Firma (SSH, criptografía moderna) |
-| **ECDH** | P-256 | P-384, P-521 | ✅ Recomendado | Intercambio de claves |
-| **X25519** | 256 bits | 256 bits | ✅ Recomendado | Intercambio de claves (post-cuántico resistente) |
+| **RSA** | 2048 bits | 4096 bits | Confiable | Cifrado, firma, TLS |
+| **ECDSA** | P-256 | P-384, P-521 | Recomendado | Firma, ECDH |
+| **EdDSA** | 256 bits | 256 bits | Recomendado | Firma (SSH, criptografía moderna) |
+| **ECDH** | P-256 | P-384, P-521 | Recomendado | Intercambio de claves |
+| **X25519** | 256 bits | 256 bits | Recomendado | Intercambio de claves (post-cuántico resistente) |
 
 ---
 
@@ -596,3 +596,8 @@ watch -n 3600 'testssl.sh --json target.com:443 >> audit_continuous.log'
 ```
 
 ---
+
+#
+http://www.hackingyseguridad.com/
+#
+
