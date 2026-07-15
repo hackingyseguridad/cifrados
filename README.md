@@ -39,7 +39,7 @@ Vulnerabilidades conocidas asociadas: POODLE, BEAST, CRIME, Lucky13, Sweet32 (3D
 
 [**+ cifrados recomendados**](https://github.com/hackingyseguridad/cifrados/blob/main/LEEME.md)
 
-https://github.com/hackingyseguridad/cifrados/blob/main/cifrados.md
+[**+ cifrados recomendados 2**](https://github.com/hackingyseguridad/cifrados/blob/main/CIFRADOS.md)
 
 ---
 
