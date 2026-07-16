@@ -1,3 +1,4 @@
+# filtro para resultado de nmap 
 echo "====================================="
 
 current_ip=""
