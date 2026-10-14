@@ -131,7 +131,7 @@ Para cifrar con RSA usar siempre RSA-OAEP, nunca PKCS#1 v1.5 (ROBOT, Marvin).
 | **Encryption** | aes256-gcm@openssh.com, aes256-ctr, chacha20-poly1305@openssh.com | chacha20-poly1305@openssh.com, aes256-gcm@openssh.com |
 | **MAC** | hmac-sha2-256-etm@openssh.com | hmac-sha2-512-etm@openssh.com |
 | **Compression** | Desactivada | Desactivada |
-| **Versión OpenSSH** | ≥ 9.6 (strict-KEX, Terrapin) | ≥ 9.9 (ML-KEM híbrido) |
+| **Versión OpenSSH** | ≥ 10.6 (mínima recomendada; strict-KEX desde 9.6) | ≥ 10.6 (mínima recomendada; ML-KEM híbrido desde 9.9) |
 
 ```bash
 # Configuración SSH segura (/etc/ssh/sshd_config)
@@ -143,6 +143,21 @@ KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,curve25519-sha256@libssh.o
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
 MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 ```
+
+**Cómo interpretar las tablas de SSH**
+
+> Las tablas de seguridad media y alta son **combinaciones recomendadas**, no una lista cerrada de lo único permitido. Se aplican con rigor cuando SSH se expone a Internet o a proveedores. En LAN internas y redes de gestión aisladas deberían ser el objetivo, aunque en muchos casos sea difícil de conseguir por las versiones de los equipos, del sistema operativo o de OpenSSH.
+
+| Nivel | Ejemplos |
+|-------|----------|
+| 🟢 Recomendado seguridad alta (militar) | `mlkem768x25519-sha256`, `curve25519-sha256`, `chacha20-poly1305@openssh.com`, `aes256-gcm@openssh.com`, `hmac-sha2-256-etm@openssh.com`, `ssh-ed25519` |
+| 🟡 Aceptable por compatibilidad con lo que hay | `aes128-ctr`, `aes192-ctr`, `aes256-ctr`, `aes128-gcm@openssh.com`, `hmac-sha2-256/512` (sin `-etm`), `ecdh-sha2-nistp256/384/521`, `diffie-hellman-group14-sha256`, `group16-sha512`, claves `rsa-sha2-256/512` (RSA ≥ 3072), `ecdsa-sha2-nistp256` |
+| 🔴 Evitar: muy inseguros, rotos, vulnerables! | SSH v1, `3des-cbc`, `arcfour`, `blowfish-cbc`, `hmac-md5`, `hmac-sha1`, `diffie-hellman-group1-sha1`, `group14-sha1`, `ssh-rsa` (SHA-1), `ssh-dss` |
+
+- Los `aes*-cbc` están en el límite entre amarillo y rojo: solo si es imprescindible y con controles compensatorios.
+- **SSH expuesto a Internet o a proveedores:** solo verde, o amarillo muy acotado y justificado, con OpenSSH parcheado, acceso por clave y filtrado por IP o VPN.
+- **LAN internas y redes de gestión aisladas:** el verde es el objetivo. Se tolera amarillo mientras haya equipos que no puedan actualizarse, con controles compensatorios (segmentación, bastión o salto, registro y plan de actualización).
+- **Versión mínima recomendada: OpenSSH 10.6.** Los mínimos técnicos de cada función son 9.6 (strict-KEX, Terrapin) y 9.9 (ML-KEM híbrido). En distribuciones con parches retroportados, comprobar el parche y no solo el número de versión.
 
 #### IPsec (IKEv2)
 
