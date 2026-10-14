@@ -6,10 +6,10 @@
 
 - [Introducción](#introducción)
 - [Niveles de Seguridad](#niveles-de-seguridad)
-- [Cifrados y Protocolos Recomendados](#1--cifrados-y-protocolos-recomendados)
-- [Cifrados NO Recomendados](#2--cifrados-y-protocolos-no-recomendados)
-- [Certificados Digitales](#3--certificados-digitales)
-- [Herramientas de Escaneo](#4--herramientas-de-escaneo)
+- [Cifrados y Protocolos Recomendados](#protocolos-recomendados)
+- [Cifrados NO Recomendados](#cifrados-y-protocolos-no-recomendados)
+- [Certificados Digitales](#certificados-digitales)
+- [Herramientas de Escaneo](#herramientas-de-escaneo)
 - [Guía de Instalación](#guía-de-instalación)
 
 ---
@@ -33,7 +33,7 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 | Seguridad Baja | Cifrados legacy, no recomendados para datos sensibles | Sistemas heredados, compatibilidad | `seguridad_baja.txt` |
 | Seguridad Media | Aceptables para la mayoría de aplicaciones comerciales | E-commerce, aplicaciones web, HTTPS | `seguridad_media.txt` |
 | Seguridad Alta | Recomendado para datos muy sensibles y financieros | Banca, datos personales, HIPAA | `seguridad_alta.txt` |
-| Seguridad Militar | Nivel máximo, usado en contextos de defensa | Secretos de estado, datos clasificados | `seguridad_militar.txt` |
+| Seguridad Militar | Nivel máximo, usado en contextos de defensa (referencia: CNSA 2.0) | Secretos de estado, datos clasificados | `seguridad_militar.txt` |
 
 ---
 
@@ -45,23 +45,29 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 |-----------|--------|------|----------------|--------|
 | **SSLv2** | ❌ Roto | 1995 | 🚫 NO USAR | Completamente comprometido (DROWN) |
 | **SSLv3** | ❌ Roto | 1996 | 🚫 NO USAR | Vulnerable a POODLE |
-| **TLS 1.0** | ❌ Deprecado | 1999 | 🚫 NO USAR | Vulnerable a ataques (BEAST) |
-| **TLS 1.1** | ❌ Deprecado | 2006 | 🚫 NO USAR | No soporta AEAD, POODLE |
-| **TLS 1.2** | ✅ Soportado | 2008 | 🟠 ACEPTABLE | Con cifrados modernos (GCM) |
+| **TLS 1.0** | ❌ Deprecado | 1999 | 🚫 NO USAR | Deprecado por RFC 8996; vulnerable a BEAST |
+| **TLS 1.1** | ❌ Deprecado | 2006 | 🚫 NO USAR | Deprecado por RFC 8996; no soporta AEAD, POODLE |
+| **TLS 1.2** | ✅ Soportado | 2008 | 🟠 ACEPTABLE | Solo con ECDHE + AEAD (GCM, ChaCha20); sin CBC ni RSA estático |
 | **TLS 1.3** | ✅ Actual | 2018 | 🟢 RECOMENDADO | Estado del arte, eliminó debilidades |
-| **TLS 1.4** | ⏳ Propuesto | ~2027 | 🟢 FUTURO | En desarrollo, post-cuántico |
+
+> **Nota**: TLS 1.4 no existe. El soporte post-cuántico llega a TLS 1.3 mediante grupos de intercambio híbridos (X25519MLKEM768).
 
 ### Cifrados simétricos recomendados
 
 | Cifrado | Tamaño clave | Modo | Seguridad | Comentario |
 |---------|-------------|------|----------|-----------|
 | **AES-128** | 128 bits | GCM | 🟠 Media | Aceptable, estándar NIST |
-| **AES-192** | 192 bits | GCM | 🟢 Alta | Buen balance seguridad/rendimiento |
+| **AES-192** | 192 bits | GCM | 🟢 Alta | Buen balance; no existe en suites TLS (sí en IPsec, PGP y almacenamiento) |
 | **AES-256** | 256 bits | GCM | 🟢 Muy Alta | Máxima seguridad (recomendado) |
 | **ChaCha20-Poly1305** | 256 bits | AEAD | 🟢 Muy Alta | Rápido en CPU sin AES-NI |
 | **AES-GCM** | 128-256 | AEAD | 🟢 Alta | Integridad + confidencialidad |
+| **AES-GCM-SIV** | 128-256 | AEAD | 🟢 Alta | Resistente a reutilización de nonce |
+| **XChaCha20-Poly1305** | 256 bits | AEAD | 🟢 Muy Alta | Nonce de 192 bits, seguro para cifrado en reposo |
+| **AES-256-XTS** | 512 bits (2×256) | XTS | 🟢 Alta | Solo cifrado de disco (sin integridad) |
 
-⚠️ **Modos INSEGUROS**: AES-ECB, AES-CBC (sin HMAC), AES-CTR (sin integridad)
+⚠️ **Modos INSEGUROS**: AES-ECB, AES-CBC (sin Encrypt-then-MAC), AES-CFB, AES-CTR (sin MAC)
+
+⚠️ Con GCM nunca se debe repetir el nonce con la misma clave.
 
 ### 🔑 Intercambio de Claves (Key Exchange)
 
@@ -72,10 +78,12 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 | **ECDHE-P521** | 521 bits | 🟢 Muy Alta | ✅ Sí | Máxima seguridad |
 | **X25519** | 256 bits | 🟢 Alta | ✅ Sí | Moderno y rápido |
 | **X448** | 448 bits | 🟢 Muy Alta | ✅ Sí | Mayor seguridad que X25519 |
-| **DH grupal < 2048** | 1024 bits | 🔴 Baja | ❌ No | Vulnerable (Logjam) |
+| **DH grupos < 2048** | 1024 bits | 🔴 Baja | ❌ No | Vulnerable (Logjam) |
 | **DH grupo 14** | 2048 bits | 🟠 Media | ✅ Sí | Mínimo aceptable |
-| **DH grupo 19** | 256 bits Curva | 🟢 Alta | ✅ Sí | ECDH moderno |
-| **DH grupo 21** | 512 bits Curva | 🟢 Muy Alta | ✅ Sí | Máxima seguridad |
+| **DH grupo 19** | 256 bits (P-256) | 🟢 Alta | ✅ Sí | ECDH moderno |
+| **DH grupo 21** | 521 bits (P-521) | 🟢 Muy Alta | ✅ Sí | Máxima seguridad |
+| **X25519MLKEM768** (híbrido) | 1216 bytes (clave pública) | 🟢 Muy Alta | ✅ Sí | Recomendado, post-cuántico |
+| **RSA estático / DH-ECDH estático** | — | 🔴 Baja | ❌ No | 🚫 NO USAR (sin PFS; ROBOT, Marvin) |
 
 **PFS = Perfect Forward Secrecy** (si se compromete la clave privada, sesiones pasadas permanecen seguras)
 
@@ -84,26 +92,33 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 | Hash | Tamaño | Colisiones | Seguridad | Uso |
 |------|--------|-----------|----------|-----|
 | **MD5** | 128 bits | ❌ Encontradas | 🔴 NO USAR | Completamente roto |
-| **SHA-1** | 160 bits | ❌ Prácticas | 🔴 NO USAR | Deprecated en HTTPS |
+| **SHA-1** | 160 bits | ❌ Prácticas | 🔴 NO USAR | Deprecado en HTTPS y firmas; HMAC-SHA1 solo obsoleto |
 | **SHA-256** | 256 bits | ✅ Seguro | 🟢 Recomendado | Estándar actual |
 | **SHA-384** | 384 bits | ✅ Seguro | 🟢 Recomendado | Mayor seguridad |
 | **SHA-512** | 512 bits | ✅ Seguro | 🟢 Recomendado | Máxima seguridad |
-| **SHA-3** | 256/512 | ✅ Seguro | 🟢 Futuro | Estándar moderno |
+| **SHA-3** | 256/512 | ✅ Seguro | 🟢 Recomendado | Estándar moderno (FIPS 202) |
 | **BLAKE2** | Variable | ✅ Seguro | 🟢 Rápido | Más rápido que MD5 |
+
+> **Contraseñas**: no usar hashes simples (MD5, SHA-1, SHA-256) para almacenarlas; ver *Contraseñas (KDF) y cifrado en reposo*.
 
 ### Firma Digital (Digital Signatures)
 
 | Algoritmo | Tamaño Clave | Seguridad | Velocidad | Recomendación |
 |-----------|-------------|----------|-----------|----------------|
-| **RSA-2048** | 2048 bits | 🔴 Débil | Lenta | NO USAR |
-| **RSA-3072** | 3072 bits | 🟠 Aceptable | Lenta | Aceptable (legacy) |
+| **RSA-2048** | 2048 bits | 🟠 Mínimo | Lenta | Aceptable hasta 2030 (NIST IR 8547); preferir ≥ 3072 |
+| **RSA-3072** | 3072 bits | 🟢 Alta | Lenta | Recomendado (≈128 bits) |
 | **RSA-4096** | 4096 bits | 🟢 Alta | Lenta | Recomendado RSA |
 | **ECDSA-P256** | 256 bits | 🟠 Media | Rápida | Aceptable |
 | **ECDSA-P384** | 384 bits | 🟢 Alta | Rápida | Recomendado ECDSA |
 | **EdDSA (Ed25519)** | 256 bits | 🟢 Muy Alta | Muy Rápida | ✅ MEJOR OPCIÓN |
 | **EdDSA (Ed448)** | 456 bits | 🟢 Extrema | Muy Rápida | Máxima seguridad |
+| **DSA** | 1024-3072 bits | 🔴 Obsoleto | Lenta | 🚫 NO USAR (retirado en FIPS 186-5) |
 
 **Ed25519 es la mejor opción moderna**: segura, rápida y sin vulnerabilidades conocidas.
+
+Para cifrar con RSA usar siempre RSA-OAEP, nunca PKCS#1 v1.5 (ROBOT, Marvin).
+
+> **Nota**: RSA, ECDSA, EdDSA y ECDH son vulnerables a un ordenador cuántico. NIST IR 8547 (borrador) propone deprecarlos en 2030 y prohibirlos en 2035.
 
 ### Protocolo SSH
 
@@ -112,16 +127,19 @@ Se clasifica las recomendaciones en **4 niveles de seguridad**:
 | Componente | Recomendado (Seguridad Media) | Recomendado (Seguridad Alta) |
 |-----------|--------------------------------|------------------------------|
 | **Host Key** | ecdsa-sha2-nistp256, ssh-ed25519 | ssh-ed25519 |
-| **Key Exchange** | curve25519-sha256 | curve25519-sha256 |
-| **Encryption** | aes256-ctr, chacha20-poly1305 | chacha20-poly1305, aes256-gcm |
-| **MAC** | hmac-sha2-256 | hmac-sha2-512 |
+| **Key Exchange** | curve25519-sha256 | mlkem768x25519-sha256 (OpenSSH ≥ 9.9), curve25519-sha256 |
+| **Encryption** | aes256-gcm@openssh.com, aes256-ctr, chacha20-poly1305@openssh.com | chacha20-poly1305@openssh.com, aes256-gcm@openssh.com |
+| **MAC** | hmac-sha2-256-etm@openssh.com | hmac-sha2-512-etm@openssh.com |
 | **Compression** | Desactivada | Desactivada |
+| **Versión OpenSSH** | ≥ 9.6 (strict-KEX, Terrapin) | ≥ 9.9 (ML-KEM híbrido) |
 
 ```bash
 # Configuración SSH segura (/etc/ssh/sshd_config)
+# strict-KEX (Terrapin): OpenSSH ≥ 9.6 en cliente y servidor
+# mlkem768x25519-sha256 requiere OpenSSH ≥ 9.9; con versiones anteriores, eliminarlo de KexAlgorithms
 Protocol 2
 HostKey /etc/ssh/ssh_host_ed25519_key
-KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org
+KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,curve25519-sha256@libssh.org
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
 MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 ```
@@ -132,8 +150,8 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 |-----------|-----------------|-----------------|
 | **Protocolo** | IKEv2 | IKEv2 (no IKEv1) |
 | **Autenticación** | SHA-256 | SHA-512 |
-| **Cifrado** | AES-256 | AES-256 + ChaCha20 |
-| **Grupo DH** | Grupo 19 (256 bits) | Grupo 21 (512 bits) |
+| **Cifrado** | AES-256-GCM | AES-256-GCM (o ChaCha20-Poly1305) |
+| **Grupo DH** | Grupo 19 (P-256) | Grupo 20 (P-384) o 21 (P-521) + ML-KEM (RFC 9370, híbrido) |
 | **Integridad** | SHA-256 | SHA-512 |
 
 #### WPA/WiFi
@@ -141,11 +159,12 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 | Estándar | Seguridad | Recomendación | Notas |
 |----------|----------|----------------|-------|
 | **WEP** | 🔴 Roto | ❌ NO USAR | 40-bit IV, completamente comprometido |
-| **WPA** | 🔴 Roto | ❌ NO USAR | Vulnerable a KRACK |
-| **WPA2-Personal** | 🟠 Media | Aceptable | Mejor que WPA |
+| **WPA** | 🔴 Roto | ❌ NO USAR | TKIP roto (Beck-Tews) |
+| **WPA2-Personal** | 🟠 Media | Aceptable | Solo con AES-CCMP (nunca TKIP), PMF y contraseña robusta; KRACK mitigado con parches |
 | **WPA2-Enterprise** | 🟢 Alta | Recomendado | Con 802.1X |
-| **WPA3-Personal** | 🟢 Alta | ✅ Recomendado | SAE, Opportunistic Wireless Encryption |
-| **WPA3-Enterprise** | 🟢 Muy Alta | ✅ MEJOR | AES-192/256, 192-bit encryption |
+| **WPA3-Personal** | 🟢 Alta | ✅ Recomendado | SAE (Dragonblood mitigado en firmware actual); OWE es solo para redes abiertas (Enhanced Open) |
+| **WPA3-Enterprise** | 🟢 Muy Alta | ✅ MEJOR | Modo 192 bits (GCMP-256, ECDH/ECDSA P-384, SHA-384) |
+| **WPA3 modo transición** | 🟠 Media | ⚠️ EVITAR | Permite downgrade a WPA2 (Dragonblood); exigir PMF |
 
 #### PGP/GPG
 
@@ -156,18 +175,31 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 | **Firma** | ECDSA P-256 o EdDSA | EdDSA (Ed25519) |
 | **Hash** | SHA-256 | SHA-512 |
 | **Tamaño RSA (si se usa)** | 3072 bits | 4096 bits |
+| **Formato / integridad** | MDC obligatorio (EFAIL) | OpenPGP v6 (RFC 9580, AEAD OCB/GCM) si la implementación lo soporta |
+
+### Contraseñas (KDF) y cifrado en reposo
+
+| Uso | Recomendado (Media) | Recomendado (Alta) | Evitar |
+|-----|----------------------|----------------------|--------|
+| **Contraseñas** | PBKDF2-HMAC-SHA256 (≥600.000 iteraciones), bcrypt (coste ≥12) | Argon2id, scrypt | MD5, SHA-1, SHA-256 sin sal ni KDF |
+| **Derivación de claves** | HKDF-SHA256 | HKDF-SHA384/512 | Hash simple de la contraseña |
+| **Disco** | AES-256-XTS | AES-256-XTS | AES-ECB, AES-CBC sin autenticar |
+| **Datos / ficheros** | AES-256-GCM | AES-256-GCM-SIV, XChaCha20-Poly1305 | Reutilizar nonce |
 
 ### Post-Cuántico (Quantum-Safe)
 
 | Algoritmo | Tipo | Tamaño Clave | Estado | Recomendación |
 |-----------|------|-------------|--------|----------------|
-| **ML-KEM-768** (Kyber) | Encapsulación | 768 bits | 🟢 NIST PQC | Media/Alta |
-| **ML-KEM-1024** | Encapsulación | 1024 bits | 🟢 NIST PQC | Muy Alta |
-| **ML-DSA** (Dilithium) | Firma | 2544 bytes | 🟢 NIST PQC | Recomendado |
-| **SLH-DSA** (SPHINCS+) | Firma | Variable | 🟢 NIST PQC | Stateless |
-| **Falcon** | Firma | 897 bytes | 🟢 NIST PQC | Compacto |
+| **ML-KEM-768** (Kyber) | Encapsulación | 1184 bytes (clave pública) | 🟢 NIST FIPS 203 | Media/Alta |
+| **ML-KEM-1024** | Encapsulación | 1568 bytes (clave pública) | 🟢 NIST FIPS 203 | Muy Alta |
+| **ML-DSA** (Dilithium) | Firma | 1952 bytes (ML-DSA-65, clave pública) | 🟢 NIST FIPS 204 | Recomendado |
+| **SLH-DSA** (SPHINCS+) | Firma | Variable | 🟢 NIST FIPS 205 | Stateless |
+| **FN-DSA** (Falcon) | Firma | 897 bytes (Falcon-512, clave pública) | 🟠 FIPS 206 (borrador) | Compacto |
+| **X25519MLKEM768** | KEM híbrido | 1216 bytes | 🟢 Desplegado en navegadores y CDN | Recomendado (TLS 1.3) |
+| **HQC** | Encapsulación (códigos) | — | 🟠 Seleccionado por NIST (2025), en estandarización | Respaldo de ML-KEM |
+| **LMS / XMSS** | Firma con estado | — | 🟢 NIST SP 800-208 | Firmware y arranque seguro |
 
-> **Nota**: Los algoritmos post-cuánticos de NIST (2024) son los más actuales y recomendados.
+> **Nota**: Los algoritmos post-cuánticos de NIST (FIPS 203, 204 y 205, agosto de 2024) son los más actuales y recomendados. Se aconseja el modo **híbrido** (clásico + post-cuántico).
 
 ---
 
@@ -177,26 +209,40 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 
 | Categoría | Algoritmos | Vulnerabilidades | Riesgo |
 |-----------|-----------|-----------------|--------|
-| **Cifrados de Bloque Débiles** | DES, 3DES, RC2 | Tamaño clave insuficiente, colisiones | 🔴 CRÍTICO |
-| **Cifrados Stream** | RC4 | Bias en el keystream (CHAOS) | 🔴 CRÍTICO |
-| **Cifrados Modernos (Mal Usados)** | AES-ECB, AES-CBC | Patrones, bit-flipping | 🔴 CRÍTICO |
-| **Funciones Hash** | MD5, SHA-1 | Colisiones prácticas | 🔴 CRÍTICO |
+| **Cifrados de Bloque Débiles** | DES, 3DES, RC2, IDEA, CAST5, Blowfish | Clave o bloque pequeño (Sweet32) | 🔴 CRÍTICO |
+| **Cifrados Stream** | RC4 | Sesgos en el keystream (Bar Mitzvah, RC4 NOMORE) | 🔴 CRÍTICO |
+| **Cifrados Modernos (Mal Usados)** | AES-ECB, AES-CBC (sin EtM), AES-CFB, AES-CTR sin MAC | Patrones (ECB), bit-flipping, padding oracle (CBC) | 🔴 CRÍTICO |
+| **Funciones Hash** | MD2, MD4, MD5, SHA-1 | Colisiones prácticas | 🔴 CRÍTICO |
 | **Intercambio Claves** | Diffie-Hellman < 2048 | Logjam, pre-computation | 🔴 CRÍTICO |
+| **Cifrado / intercambio RSA** | RSA estático, RSA PKCS#1 v1.5 | ROBOT, Marvin (padding oracle), sin PFS | 🔴 CRÍTICO |
+| **Suites obsoletas** | NULL, EXPORT, anónimas (aNULL/eNULL) | FREAK, Logjam | 🔴 CRÍTICO |
+
+> **No rotos, pero no recomendados (compatibilidad)**: CAMELLIA, ARIA, Twofish y Serpent no tienen ataques prácticos, pero están poco soportados; preferir AES o ChaCha20.
 
 ### Vulnerabilidades por protocolo/algoritmo
 
 | Vulnerabilidad | Afecta a | Año | CVSS | Mitigación |
 |----------------|----------|------|------|-----------|
 | **POODLE** | SSLv3, TLS 1.0 | 2014 | 7.1 | Deshabilitar SSLv3 |
-| **Heartbleed** | OpenSSL < 1.0.1g | 2014 | 7.5 | Actualizar OpenSSL |
-| **FREAK** | OpenSSL, exportación | 2015 | 5.9 | Usar TLS 1.2+ |
+| **Heartbleed** | OpenSSL 1.0.1 a 1.0.1f | 2014 | 7.5 | Actualizar OpenSSL |
+| **FREAK** | OpenSSL, exportación | 2015 | 5.9 | Deshabilitar suites EXPORT y actualizar |
 | **Logjam** | DH < 2048 bits | 2015 | 5.9 | Usar DH >= 2048 o ECDHE |
 | **DROWN** | SSLv2 | 2016 | 7.5 | Deshabilitar SSLv2 |
-| **Sweet32** | 3DES, Blowfish | 2016 | 6.8 | No usar 3DES |
-| **KRACK** | WPA2-TKIP | 2017 | 8.1 | Usar WPA2-AES o WPA3 |
+| **Sweet32** | 3DES, Blowfish | 2016 | 6.8 | No usar cifrados de bloque de 64 bits |
+| **KRACK** | WPA2 (4-way handshake) | 2017 | 8.1 | Parchear clientes y AP; usar WPA3 |
 | **BEAST** | AES-CBC en TLS 1.0 | 2011 | 5.9 | Usar TLS 1.2+ |
 | **Lucky13** | CBC mode en TLS | 2013 | 5.1 | Usar AEAD (GCM) |
 | **CRIME** | Compresión TLS | 2012 | 7.5 | Deshabilitar compresión |
+| **SLOTH** | TLS 1.2 con MD5/SHA-1 en firmas | 2016 | — | No usar MD5/SHA-1 en firmas |
+| **SHAttered** | SHA-1 | 2017 | — | Migrar a SHA-256 o superior |
+| **ROBOT** | RSA PKCS#1 v1.5 en TLS | 2017 | — | Deshabilitar RSA estático |
+| **EFAIL** | PGP / S-MIME (CBC/CFB sin MDC) | 2018 | — | Exigir MDC/AEAD y actualizar clientes |
+| **Dragonblood** | WPA3-SAE | 2019 | — | Actualizar firmware; evitar modo transición |
+| **Raccoon** | DH en TLS ≤ 1.2 | 2020 | — | Usar ECDHE o TLS 1.3 |
+| **FragAttacks** | WiFi (WEP a WPA3) | 2021 | — | Parchear dispositivos |
+| **Terrapin** | SSH (ChaCha20-Poly1305, CBC-EtM) | 2023 | 5.9 (CVE-2023-48795) | OpenSSH ≥ 9.6 con strict-KEX |
+| **Marvin** | RSA PKCS#1 v1.5 (descifrado) | 2023 | — | Usar RSA-OAEP o ECDHE |
+| **BlastRADIUS** | RADIUS (MD5) | 2024 | — | Actualizar RADIUS; usar Message-Authenticator o RADIUS sobre TLS |
 
 ### Protocolos específicos a evitar
 
@@ -206,21 +252,28 @@ SSH v1:
   - Usar: SSH v2 siempre
 
 Cifrados SSH a evitar:
-  - 3des-cbc, arcfour, blowfish-cbc
+  - 3des-cbc, arcfour, blowfish-cbc, aes*-cbc
   - hmac-md5, hmac-sha1 (sin -etm)
+  - OpenSSH < 9.6 sin strict-KEX (Terrapin)
   
 IKEv1:
-  - ❌ Obsoleto
+  - ❌ Obsoleto (incluido el modo agresivo)
   - Usar: IKEv2 siempre
   
 Grupos DH:
   - ❌ Grupo 1 (768 bits) - Totalmente roto
   - ❌ Grupo 2 (1024 bits) - Vulnerable a Logjam
+  - ❌ Grupo 5 (1536 bits) - Insuficiente
   - ✅ Mínimo: Grupo 14 (2048 bits)
   
 WEP/WPA:
   - ❌ Completamente comprometido
+  - ❌ WPA2 con TKIP, WPS activado
   - Usar: WPA2-AES o WPA3 siempre
+
+TLS 1.2 mal configurado:
+  - ❌ Suites CBC, RSA estático, sin AEAD
+  - Usar: ECDHE + AEAD (GCM o ChaCha20)
 ```
 
 ---
@@ -235,11 +288,13 @@ WEP/WPA:
 |--------|----------------|--------|
 | **Autoridad Certificadora** | CA reconocida (Let's Encrypt, Sectigo, etc.) | Validación de confianza |
 | **Algoritmo Firma** | SHA-256, SHA-384, SHA-512 | SHA-1 está deprecado |
-| **Algoritmo Clave** | RSA-2048+, ECDSA-P256+, EdDSA | Resistencia |
+| **Algoritmo Clave** | RSA-2048+ (mejor ≥ 3072), ECDSA-P256/P384; EdDSA solo en PKI privada | Resistencia y compatibilidad con CA públicas |
 | **Tipo Certificado** | DV, OV, EV (según necesidad) | Validación de dominio/organización |
-| **Validez** | 1 año máximo (90 días recomendado) | Rotación frecuente = seguridad |
+| **Validez** | Máx. 200 días (desde mar-2026), 100 días (2027) y 47 días (2029) según CA/B Forum; automatizar con ACME | Rotación frecuente = seguridad |
 | **SAN** | Múltiples dominios si es necesario | Flexibilidad y costo |
 | **OCSP Stapling** | Habilitado | Revocación sin latencia |
+| **Certificate Transparency** | Monitorizar los logs CT de tus dominios | Detecta certificados emitidos sin autorización |
+| **ECH** | Encrypted Client Hello donde sea posible | Oculta el SNI |
 
 ### Herramientas para Verificar Certificados
 
@@ -269,7 +324,7 @@ Este repositorio incluye herramientas automáticas para auditar la seguridad cri
 ./testssl.sh https://ejemplo.com
 ./testssl.sh 192.168.1.1:443
 ./testssl.sh --full ejemplo.com
-./testssl.sh --json=results.json ejemplo.com
+./testssl.sh --jsonfile results.json ejemplo.com
 ```
 
 **Funcionalidades**:
@@ -313,6 +368,25 @@ ejemplo.com:443
 ./filtro.sh resultados.txt "AES-256"
 ```
 
+### 🔧 ssh-audit
+
+**Descripción**: Auditoría de servidores y clientes SSH (algoritmos, claves, Terrapin)
+
+**Uso**:
+```bash
+ssh-audit ejemplo.com
+ssh-audit -p 2222 192.168.1.1
+```
+
+### 🔧 nmap (ssl-enum-ciphers)
+
+**Descripción**: Enumera protocolos y cifrados TLS soportados y los califica
+
+**Uso**:
+```bash
+nmap --script ssl-enum-ciphers -p 443 ejemplo.com
+```
+
 ---
 
 ### Guía de Instalación
@@ -322,13 +396,16 @@ ejemplo.com:443
 ```bash
 # Ubuntu/Debian
 sudo apt-get update
-sudo apt-get install -y openssl curl bash git
+sudo apt-get install -y openssl curl bash git nmap
 
 # CentOS/RHEL
-sudo yum install -y openssl curl bash git
+sudo yum install -y openssl curl bash git nmap
 
 # macOS
-brew install openssl curl bash
+brew install openssl curl bash nmap
+
+# ssh-audit (todas las plataformas)
+pip install ssh-audit
 ```
 
 ### Descarga del Repositorio
@@ -371,12 +448,17 @@ cat seguridad_baja.txt
 # 2. Implementar configuración segura
 # En Apache: /etc/apache2/mods-enabled/ssl.conf
 SSLProtocol -all +TLSv1.3 +TLSv1.2
-SSLCipherSuite ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384
-SSLCurves X25519:X448:secp384r1
+SSLCipherSuite ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305
+SSLOpenSSLConfCmd Curves X25519:X448:secp384r1
+# Con OpenSSL ≥ 3.5 (híbrido post-cuántico):
+# SSLOpenSSLConfCmd Curves X25519MLKEM768:X25519:secp384r1
 
 # En Nginx: /etc/nginx/nginx.conf
 ssl_protocols TLSv1.3 TLSv1.2;
-ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;
+ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;
+ssl_ecdh_curve X25519:X448:secp384r1;
+# Con OpenSSL ≥ 3.5 (híbrido post-cuántico):
+# ssl_ecdh_curve X25519MLKEM768:X25519:secp384r1;
 ssl_prefer_server_ciphers on;
 ```
 
@@ -384,9 +466,10 @@ ssl_prefer_server_ciphers on;
 
 ```bash
 # Editar /etc/ssh/sshd_config
+# (mlkem768x25519-sha256 requiere OpenSSH ≥ 9.9; con versiones anteriores, eliminarlo)
 Protocol 2
 HostKey /etc/ssh/ssh_host_ed25519_key
-KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org
+KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,curve25519-sha256@libssh.org
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
 MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
 
@@ -408,11 +491,11 @@ echo "db.empresa.com:3306" >> servidores.txt
 # Escanear todos
 for server in $(cat servidores.txt); do
     echo "Escaneando $server..."
-    ./testssl.sh "$server" --json="$server.json"
+    ./testssl.sh --jsonfile "$server.json" "$server"
 done
 
 # Analizar resultados
-grep -r "FAILED" *.json > fallos.txt
+grep -lE '"severity" *: *"(HIGH|CRITICAL)"' *.json > fallos.txt
 ```
 
 ### migración a post-cuántico
@@ -423,11 +506,12 @@ grep -r "FAILED" *.json > fallos.txt
 
 # 2. Planificar migración
 # - Fase 1: TLS 1.3 + ECDHE moderno
-# - Fase 2: Híbrido con ML-KEM-768
+# - Fase 2: Híbrido X25519MLKEM768 (X25519 + ML-KEM-768)
 # - Fase 3: ML-KEM-1024 + ML-DSA
 
-# 3. Implementar en OpenSSL 3.0+
-# (Próximas versiones incluirán soporte PQC nativo)
+# 3. Implementar con OpenSSL ≥ 3.5 y OpenSSH ≥ 9.9 (soporte ML-KEM nativo)
+openssl list -kem-algorithms | grep -i ml-kem
+ssh -Q kex | grep mlkem
 ```
 
 ---
@@ -438,9 +522,9 @@ grep -r "FAILED" *.json > fallos.txt
 
 | Servicio | Protocolo | Cifrado | Key Exchange | Hash | Firma |
 |----------|-----------|---------|--------------|------|-------|
-| **HTTPS** | TLS 1.3 | AES-256-GCM | X25519 | SHA-256 | ECDSA-P384 |
-| **SSH** | SSH v2 | ChaCha20-Poly1305 | curve25519-sha256 | SHA-256 | Ed25519 |
-| **IPsec** | IKEv2 | AES-256 | DH-21 (512-bit) | SHA-512 | EdDSA |
+| **HTTPS** | TLS 1.3 | AES-256-GCM | X25519MLKEM768 (híbrido) | SHA-256 | ECDSA-P384 |
+| **SSH** | SSH v2 | ChaCha20-Poly1305 | mlkem768x25519-sha256 | SHA-256 | Ed25519 |
+| **IPsec** | IKEv2 | AES-256-GCM | DH-21 (P-521) | SHA-512 | EdDSA |
 | **VPN** | WireGuard | ChaCha20-Poly1305 | X25519 | BLAKE2 | Ed25519 |
 | **WiFi** | WPA3 | AES-256-GCMP | SAE | SHA-384 | N/A |
 | **Base de Datos** | TLS 1.3 | AES-256-GCM | ECDHE-P384 | SHA-256 | Ed25519 |
@@ -450,10 +534,11 @@ grep -r "FAILED" *.json > fallos.txt
 ### Por Nivel de Seguridad
 
 ```
-🟢 SEGURIDAD ALTA (Recomendado para 2024-2026):
+🟢 SEGURIDAD ALTA (Recomendado para 2025-2030):
    - TLS 1.3 / SSH v2 / IKEv2
    - AES-256-GCM o ChaCha20-Poly1305
    - ECDHE con curvas modernas (P-384, X25519, X448)
+   - Híbrido post-cuántico X25519MLKEM768 donde esté disponible
    - SHA-256/384/512
    - EdDSA (Ed25519) para firmas
 
@@ -466,10 +551,18 @@ grep -r "FAILED" *.json > fallos.txt
 
 🔴 SEGURIDAD BAJA (NO USAR):
    - SSLv3, TLS 1.0, TLS 1.1
-   - DES, 3DES, RC4, Blowfish
+   - DES, 3DES, RC2, RC4, IDEA, CAST5, Blowfish
+   - Suites NULL / EXPORT / anónimas
+   - RSA estático (sin PFS)
    - MD5, SHA-1
    - DH < 2048 bits
    - RSA < 2048 bits
+
+🟣 SEGURIDAD MILITAR (referencia: CNSA 2.0):
+   - AES-256, SHA-384/512
+   - ECDH/ECDSA P-384
+   - ML-KEM-1024, ML-DSA-87
+   - LMS/XMSS para firmware
 ```
 
 ---
@@ -478,12 +571,15 @@ grep -r "FAILED" *.json > fallos.txt
 
 ```
 cifrados/
-├── README.md                      # Este archivo
-├── ciffrados.md                   # Guía detallada de cifrados
+├── README.md                      # Resumen: cifrados recomendados y no recomendados
+├── LEEME.md                       # Este archivo (guía detallada)
+├── CIFRADOS.md                    # Guía detallada de cifrados
+├── AES-128.md                     # Ejemplos AES-128
+├── SKILL.md
 ├── testssl.sh                     # Auditoría de TLS/SSL
 ├── scan_cifrados.sh               # Escaneo múltiples servidores
 ├── filtro.sh                      # Procesar resultados
-├── AES-128-simetico/              # Ejemplos AES-128
+├── cifrarfichero.sh               # Cifrar un fichero
 ├── seguridad_alta.txt             # Resultado: servidores seguros
 ├── seguridad_media.txt            # Resultado: seguridad media
 ├── seguridad_baja.txt             # Resultado: servidores inseguros
@@ -498,8 +594,12 @@ cifrados/
 
 - [NIST Special Publication 800-175B](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-175B.pdf) - Guía de Criptografía
 - [RFC 8446 - TLS 1.3](https://tools.ietf.org/html/rfc8446)
-- [RFC 8308 - SSH Algoritmos](https://tools.ietf.org/html/rfc8308)
-- [RFC 7539 - ChaCha20-Poly1305](https://tools.ietf.org/html/rfc7539)
+- [RFC 8308 - Extension Negotiation en SSH](https://tools.ietf.org/html/rfc8308)
+- [RFC 8439 - ChaCha20-Poly1305](https://tools.ietf.org/html/rfc8439) (obsoleta RFC 7539)
+- [RFC 8996 - Deprecación de TLS 1.0 y 1.1](https://www.rfc-editor.org/rfc/rfc8996)
+- [RFC 9180 - HPKE](https://www.rfc-editor.org/rfc/rfc9180)
+- [RFC 9370 - Múltiples intercambios de claves en IKEv2](https://www.rfc-editor.org/rfc/rfc9370)
+- [RFC 9580 - OpenPGP](https://www.rfc-editor.org/rfc/rfc9580)
 
 ### Documentación de Seguridad
 
@@ -507,6 +607,9 @@ cifrados/
 - [Mozilla SSL Configuration Generator](https://ssl-config.mozilla.org/)
 - [SANS Top 25 Weaknesses](https://www.sans.org/top25/)
 - [NIST PQC Project](https://csrc.nist.gov/projects/post-quantum-cryptography)
+- [FIPS 203 (ML-KEM)](https://csrc.nist.gov/pubs/fips/203/final), [FIPS 204 (ML-DSA)](https://csrc.nist.gov/pubs/fips/204/final), [FIPS 205 (SLH-DSA)](https://csrc.nist.gov/pubs/fips/205/final)
+- [NIST IR 8547 - Transición a criptografía post-cuántica](https://csrc.nist.gov/pubs/ir/8547/ipd)
+- [Terrapin Attack](https://terrapin-attack.com/)
 
 ### Herramientas Relacionadas
 
